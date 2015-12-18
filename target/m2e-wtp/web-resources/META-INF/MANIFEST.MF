@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: jkan
+Implementation-Version: 1.0.0-BUILD-SNAPSHOT
+Built-By: Administrator
+Implementation-Vendor-Id: com.meiyun
+Build-Jdk: 1.8.0_66
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

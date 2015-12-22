@@ -4,12 +4,21 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 所有Model的基类
  * @author larry.qi
  */
+@MappedSuperclass
 public class JkanObject implements Serializable {
 
 	private static final long serialVersionUID = -6958384507352480877L;
@@ -17,11 +26,16 @@ public class JkanObject implements Serializable {
 	/**
 	 * ID
 	 */
+	@Id
+	@GenericGenerator(name = "generator", strategy = "increment")
+	@GeneratedValue(generator = "generator")
+	@Column(name = "id", length = 11)
 	private Integer id;
 	
 	/**
 	 * 名称
 	 */
+	@NotNull
 	private String name;
 	
 	/**
@@ -37,11 +51,13 @@ public class JkanObject implements Serializable {
 	/**
 	 * 最近更新时间
 	 */
+	@Column(name = "last_modified")
 	private Timestamp lastModified;
 	
 	/**
 	 * 扩展对象
 	 */
+	@Transient
 	private Map<String, Object> extra;
 	
 	public JkanObject(Integer id) {
@@ -62,9 +78,6 @@ public class JkanObject implements Serializable {
 	}
 
 	public String getName() {
-		if (name == null) {
-			name = UUID.randomUUID().toString();
-		}
 		return name;
 	}
 

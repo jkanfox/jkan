@@ -27,9 +27,6 @@
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.meiyun.jkan"/>
-        <property name="persistenceProvider">
-        	<bean class="org.hibernate.ejb.HibernatePersistence"/>
-        </property>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="generateDdl" value="false"/>

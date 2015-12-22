@@ -18,8 +18,15 @@ import com.meiyun.jkan.Constants;
  */
 @Controller
 @Scope(Constants.SCOPE)
-public class HomeController {
+public class HomeController extends BaseController {
 	
+	/**
+	 * 首页
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	@RequestMapping("/")
 	public void home(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("posts").forward(request, response);

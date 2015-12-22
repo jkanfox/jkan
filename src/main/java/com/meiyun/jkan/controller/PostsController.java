@@ -1,7 +1,5 @@
 package com.meiyun.jkan.controller;
 
-import java.util.UUID;
-
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
@@ -32,7 +30,7 @@ import com.meiyun.jkan.service.PostsService;
 @Controller
 @Scope(Constants.SCOPE)
 @RequestMapping("/posts")
-public class PostsController {
+public class PostsController extends BaseController {
 	
 	@Resource
 	private PostsService postsService;
@@ -93,7 +91,7 @@ public class PostsController {
 		PostsModel pm = new PostsModel();
 		pm.setDescription("description");
 		pm.setGroup(1);
-		pm.setName(UUID.randomUUID().toString());
+		pm.setName(super.randomUUID());
 		pm.setState(1);
 		pm.setTags("DD");
 		pm.setTitle(title);

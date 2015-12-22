@@ -1,6 +1,6 @@
 package com.meiyun.jkan.controller;
 
-import java.util.UUID;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -32,10 +32,10 @@ import com.meiyun.jkan.service.GroupService;
 @Controller
 @Scope(Constants.SCOPE)
 @RequestMapping("/groups")
-public class GroupController {
+public class GroupController extends BaseController {
 	
 	@Resource
-	private GroupService groupService;
+	private GroupService gs;
 	
 	/**
 	 * 查询Groups
@@ -47,7 +47,8 @@ public class GroupController {
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String findGroups() {
-		
+		List<GroupModel> list = gs.findGroups();
+		System.out.println(list.stream().count());
 		return null;
 	}
 	
@@ -58,7 +59,8 @@ public class GroupController {
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String findById(@PathVariable Integer id) {
-		
+		GroupModel gm = gs.findById(id);
+		System.out.println(gm.getName());
 		return null;
 	}
 	
@@ -106,8 +108,8 @@ public class GroupController {
 		gm.setPosition(0);
 		gm.setTitle(title);
 		gm.setState(1);
-		gm.setName(UUID.randomUUID().toString());
-		gm = groupService.addGroup(gm);
+		gm.setName(super.randomUUID());
+		gm = gs.addGroup(gm);
 		System.out.println("ID:" + gm.getId() + "Name: "+ gm.getName());
 		return null;
 	}
@@ -139,7 +141,7 @@ public class GroupController {
 	 */
 	@RequestMapping(value = "/{id}/delete", method = {RequestMethod.DELETE})
 	public String deleteGroup(@PathVariable Integer id) {
-		
+		gs.deleteGroup(id);
 		return null;
 	}
 

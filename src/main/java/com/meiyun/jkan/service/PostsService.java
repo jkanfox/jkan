@@ -31,7 +31,7 @@ public interface PostsService {
 	 * 检验Posts
 	 * @return
 	 */
-	boolean checkPost();
+	boolean checkPost(String title);
 	
 	/**
 	 * 添加Posts

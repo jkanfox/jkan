@@ -1,5 +1,7 @@
 package com.meiyun.jkan.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.meiyun.jkan.model.GroupModel;
@@ -10,4 +12,10 @@ import com.meiyun.jkan.model.GroupModel;
  */
 public interface GroupRepository extends JpaRepository<GroupModel, Integer> {
 
+	/**
+	 * 根据Title查询
+	 * @param title
+	 * @return
+	 */
+	List<GroupModel> findByTitle(String title);
 }

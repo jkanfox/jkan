@@ -71,7 +71,7 @@ public class PostsController extends BaseController {
 	 */
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
 	public @ResponseBody boolean checkPost(String title) {
-		return ps.checkPost();
+		return ps.checkPost(title);
 	}
 	
 	/**

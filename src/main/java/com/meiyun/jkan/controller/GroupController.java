@@ -1,7 +1,5 @@
 package com.meiyun.jkan.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
@@ -75,15 +73,16 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
-	public @ResponseBody List<PostsModel> findPostsByGroupId(@PathVariable Integer id) {
-		return gs.findPostsByGroupId(id);
+	public @ResponseBody Page<PostsModel> findPostsByGroupId(@PathVariable Integer id) {
+		PageRequest pageRequest = new PageRequest(0, 50);
+		return gs.findPostsByGroupId(id, pageRequest);
 	}
 	
 	/**
 	 * 检验Group title是否可用
 	 * @return
 	 */
-	@RequestMapping(value = "/check", method = {RequestMethod.POST})
+	@RequestMapping(value = "/check", method = {RequestMethod.GET})
 	public @ResponseBody boolean checkGroup(@RequestParam String title) {
 		return gs.checkGroup(title);
 	}

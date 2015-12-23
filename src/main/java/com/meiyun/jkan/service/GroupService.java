@@ -1,7 +1,5 @@
 package com.meiyun.jkan.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -35,7 +33,7 @@ public interface GroupService {
 	 * @param id
 	 * @return
 	 */
-	List<PostsModel> findPostsByGroupId(Integer id);
+	Page<PostsModel> findPostsByGroupId(Integer id, PageRequest pageRequest);
 	
 	/**
 	 * 检测名称是否可用

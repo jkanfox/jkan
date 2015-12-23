@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.meiyun.jkan.model.GroupModel;
@@ -18,8 +20,8 @@ public class GroupServiceImpl implements GroupService {
 	private GroupRepository gr;
 
 	@Override
-	public List<GroupModel> findGroups() {
-		return gr.findAll();
+	public Page<GroupModel> findGroups(PageRequest pageRequest) {
+		return gr.findAll(pageRequest);
 	}
 
 	@Override

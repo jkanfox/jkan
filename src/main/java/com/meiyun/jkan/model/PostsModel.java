@@ -1,10 +1,14 @@
 package com.meiyun.jkan.model;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.google.common.base.Preconditions;
 
 /**
  * 贴子
@@ -50,6 +54,32 @@ public class PostsModel extends JkanObject {
 
 	public PostsModel(Integer id) {
 		super(id);
+	}
+	
+	/**
+	 * 创建一个Posts对象
+	 * @param url
+	 * @param title
+	 * @param description
+	 * @param tags
+	 * @param groupId
+	 * @return
+	 */
+	public static PostsModel create(String url, String title, String description, String tags, Integer groupId) {
+		Preconditions.checkNotNull(url);
+		Preconditions.checkNotNull(title);
+		Preconditions.checkNotNull(groupId);
+
+		PostsModel pm = new PostsModel();
+		pm.setDescription(description);
+		pm.setGroup(1);
+		pm.setName(UUID.randomUUID().toString());
+		pm.setState(1);
+		pm.setTags(tags);
+		pm.setTitle(title);
+		pm.setUrl(url);
+		pm.setGroup(groupId);
+		return pm;
 	}
 
 	public String getTitle() {

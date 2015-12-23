@@ -1,7 +1,9 @@
 package com.meiyun.jkan.service;
 
 import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import com.meiyun.jkan.model.PostsModel;
 
@@ -9,9 +11,46 @@ import com.meiyun.jkan.model.PostsModel;
  * 帖子
  * @author larry.qi
  */
+@Transactional
 public interface PostsService {
 	
-	@Transactional(value = TxType.REQUIRED)
-	PostsModel addPosts(PostsModel posts) throws Exception;
+	/**
+	 * 查询Posts
+	 * @return
+	 */
+	Page<PostsModel> findPosts(PageRequest pageRequest);
+	
+	/**
+	 * 根据ID查询Posts
+	 * @param id
+	 * @return
+	 */
+	PostsModel findById(Integer id);
+	
+	/**
+	 * 检验Posts
+	 * @return
+	 */
+	boolean checkPost();
+	
+	/**
+	 * 添加Posts
+	 * @param posts
+	 * @return
+	 */
+	PostsModel addPosts(PostsModel posts);
+	
+	/**
+	 * 更新Posts
+	 * @param posts
+	 * @return
+	 */
+	PostsModel updatePosts(PostsModel posts);
+	
+	/**
+	 * 删除Posts
+	 * @param id
+	 */
+	void deletePost(Integer id);
 
 }

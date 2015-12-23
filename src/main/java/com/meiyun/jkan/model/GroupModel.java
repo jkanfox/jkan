@@ -1,8 +1,12 @@
 package com.meiyun.jkan.model;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.google.common.base.Preconditions;
 
 /**
  * 分组
@@ -36,6 +40,23 @@ public class GroupModel extends JkanObject {
 
 	public GroupModel(Integer id) {
 		super(id);
+	}
+	
+	/**
+	 * 创建分组
+	 * @param title not null
+	 * @param description
+	 * @return
+	 */
+	public static GroupModel create(String title, String description) {
+		Preconditions.checkNotNull(title, "分组名称{title}不能为空。");
+		GroupModel gm = new GroupModel();
+		gm.setDescription(description);
+		gm.setPosition(0);
+		gm.setTitle(title);
+		gm.setState(1); // 设置状态的默认值为：1
+		gm.setName(UUID.randomUUID().toString());
+		return gm;
 	}
 
 	public String getTitle() {

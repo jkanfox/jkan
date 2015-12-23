@@ -5,14 +5,20 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.base.Preconditions;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.model.GroupModel;
+import com.meiyun.jkan.model.PostsModel;
 import com.meiyun.jkan.service.GroupService;
 
 /**
@@ -20,12 +26,12 @@ import com.meiyun.jkan.service.GroupService;
  * <li>/groups: GET</li>
  * <li>/groups/{id}: GET</li>
  * <li>/groups/{id}/posts: GET</li>
- * <li>/groups/check: GET</li>
+ * <li>/groups/check: POST</li>
  * <li>/groups/new: GET</li>
  * <li>/groups/new: POST</li>
  * <li>/groups/{id}/edit: GET</li>
- * <li>/groups/{id}/edit: PUT</li>
- * <li>/groups/{id}/delete: DELETE</li>
+ * <li>/groups/{id}/edit: POST</li>
+ * <li>/groups/{id}/delete: POST</li>
  * </ul>
  * @author larry.qi
  */
@@ -46,10 +52,11 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String findGroups() {
-		List<GroupModel> list = gs.findGroups();
-		System.out.println(list.stream().count());
-		return null;
+	public @ResponseBody Page<GroupModel> findGroups(GroupModel gm, 
+			@RequestParam(defaultValue = "0", required = false) Integer page, 
+			@RequestParam(defaultValue = "50", required = false) Integer size,
+			@RequestParam(required = false) String q) {
+		return gs.findGroups(new PageRequest(page, size));
 	}
 	
 	/**
@@ -58,10 +65,8 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String findById(@PathVariable Integer id) {
-		GroupModel gm = gs.findById(id);
-		System.out.println(gm.getName());
-		return null;
+	public @ResponseBody GroupModel findById(@PathVariable Integer id) {
+		return gs.findById(id);
 	}
 	
 	/**
@@ -70,19 +75,17 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
-	public String findPostsByGroupId(@PathVariable Integer id) {
-		
-		return null;
+	public @ResponseBody List<PostsModel> findPostsByGroupId(@PathVariable Integer id) {
+		return gs.findPostsByGroupId(id);
 	}
 	
 	/**
 	 * 检验Group title是否可用
 	 * @return
 	 */
-	@RequestMapping(value = "/check", method = {RequestMethod.GET, RequestMethod.POST})
-	public String checkGroup() {
-		
-		return null;
+	@RequestMapping(value = "/check", method = {RequestMethod.POST})
+	public @ResponseBody boolean checkGroup(@RequestParam String title) {
+		return gs.checkGroup(title);
 	}
 	
 	/**
@@ -92,8 +95,7 @@ public class GroupController extends BaseController {
 	 */
 	@RequestMapping(value = "/new", method = {RequestMethod.GET})
 	public String addGroupPage() {
-		
-		return null;
+		return "group/new";
 	}
 	
 	/**
@@ -102,16 +104,8 @@ public class GroupController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping( value = "/new", method = RequestMethod.POST)
-	public String addGroup(@RequestParam String title) throws Exception {
-		GroupModel gm = new GroupModel();
-		gm.setDescription("description");
-		gm.setPosition(0);
-		gm.setTitle(title);
-		gm.setState(1);
-		gm.setName(super.randomUUID());
-		gm = gs.addGroup(gm);
-		System.out.println("ID:" + gm.getId() + "Name: "+ gm.getName());
-		return null;
+	public @ResponseBody GroupModel addGroup(@RequestParam String title, String description) throws Exception {
+		return gs.addGroup(GroupModel.create(title, description));
 	}
 	
 	/**
@@ -120,29 +114,32 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}/edit", method = {RequestMethod.GET})
-	public String editGroupPage(@PathVariable Integer id) {
-		
-		return null;
+	public String editGroupPage(@PathVariable Integer id, Model model) {
+		Preconditions.checkNotNull(id, "Group Id 不能为空。");
+		model.addAttribute("gm", gs.findById(id));
+		return "group/edit";
 	}
 	
 	/**
 	 * 编辑Group
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}/edit", method = {RequestMethod.PUT})
-	public String editGroup(@PathVariable Integer id) {
-		
-		return null;
+	@RequestMapping(value = "/{id}/edit", method = {RequestMethod.POST})
+	public @ResponseBody GroupModel editGroup(@PathVariable Integer id, GroupModel gm) {
+		Preconditions.checkNotNull(id);
+		Preconditions.checkNotNull(gm);
+		Preconditions.checkArgument(id == gm.getId());
+		return gs.updateGroup(gm);
 	}
 	
 	/**
 	 * 删除GROUP
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}/delete", method = {RequestMethod.DELETE})
-	public String deleteGroup(@PathVariable Integer id) {
+	@RequestMapping(value = "/{id}/delete", method = {RequestMethod.POST})
+	public void deleteGroup(@PathVariable Integer id) {
+		Preconditions.checkNotNull(id);
 		gs.deleteGroup(id);
-		return null;
 	}
 
 }

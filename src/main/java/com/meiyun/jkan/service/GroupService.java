@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import com.meiyun.jkan.model.GroupModel;
 import com.meiyun.jkan.model.PostsModel;
 
@@ -18,7 +21,7 @@ public interface GroupService {
 	 * 查询Groups
 	 * @return
 	 */
-	List<GroupModel> findGroups();
+	Page<GroupModel> findGroups(PageRequest pageRequest);
 	
 	/**
 	 * 根据ID查询Group

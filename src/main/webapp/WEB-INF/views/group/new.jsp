@@ -7,9 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>Insert your title</title>
+    <title>添加分组</title>
 </head>
 <body>
-
+	<form action="/groups/new" method="post">
+	<ul>
+		<li>
+			<label>名称</label>
+			<input name="title">
+		</li>
+		<li>
+			<label>描述</label>
+			<input name="description">
+		</li>
+		<li>
+			<input type="submit">
+		</li>
+	</ul>
+	</form>
+	
 </body>
 </html>

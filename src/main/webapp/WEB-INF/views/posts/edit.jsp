@@ -7,9 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>Insert your title</title>
+    <title>编辑Posts</title>
 </head>
 <body>
-
+	<form action="/posts/${c.result.id}/edit" method="post">
+	<ul>
+		<li>
+			<label>链接</label>
+			<input name="url">
+		</li>
+		<li>
+			<label>名称</label>
+			<input name="title">
+		</li>
+		<li>
+			<label>描述</label>
+			<input name="description">
+		</li>
+		<li>
+			<label>标签</label>
+			<input name="tags">
+		</li>
+		<li>
+			<label>分组</label>
+			<select name="groupId">
+				<c:forEach items="${c.result.content}" var="row">
+				<option value="${row.id}">${row.title}</option>
+				</c:forEach>
+			</select>
+		</li>
+		<li>
+			<input type="submit">
+		</li>
+	</ul>
+	</form>
 </body>
 </html>

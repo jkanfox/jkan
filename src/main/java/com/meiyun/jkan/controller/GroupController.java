@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Preconditions;
 import com.meiyun.jkan.Constants;
+import com.meiyun.jkan.Context;
 import com.meiyun.jkan.model.GroupModel;
-import com.meiyun.jkan.model.PostsModel;
 import com.meiyun.jkan.service.GroupService;
 
 /**
@@ -55,7 +55,7 @@ public class GroupController extends BaseController {
 			@RequestParam(defaultValue = "50", required = false) Integer size,
 			@RequestParam(required = false) String q) {
 		Page<GroupModel> pageInfo = gs.findGroups(new PageRequest(page, size));
-		model.addAttribute("", pageInfo);
+		model.addAttribute("c", new Context(pageInfo));
 		return "group/index";
 	}
 	
@@ -75,9 +75,12 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
-	public @ResponseBody Page<PostsModel> findPostsByGroupId(@PathVariable Integer id) {
-		PageRequest pageRequest = new PageRequest(0, 50);
-		return gs.findPostsByGroupId(id, pageRequest);
+	public String findPostsByGroupId(@PathVariable Integer id, Model model) {
+		Context c = new Context(gs.findPostsByGroupId(id, new PageRequest(0, 50)));
+		c.add("flag", true);
+		c.add("group", gs.findById(id));
+		model.addAttribute("c", c);
+		return "posts/index";
 	}
 	
 	/**
@@ -117,7 +120,7 @@ public class GroupController extends BaseController {
 	@RequestMapping(value = "/{id}/edit", method = {RequestMethod.GET})
 	public String editGroupPage(@PathVariable Integer id, Model model) {
 		Preconditions.checkNotNull(id, "Group Id 不能为空。");
-		model.addAttribute("gm", gs.findById(id));
+		model.addAttribute("c", new Context(gs.findById(id)));
 		return "group/edit";
 	}
 	
@@ -137,7 +140,7 @@ public class GroupController extends BaseController {
 	 * 删除GROUP
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}/delete", method = {RequestMethod.POST})
+	@RequestMapping(value = "/{id}/delete", method = {RequestMethod.GET, RequestMethod.POST})
 	public void deleteGroup(@PathVariable Integer id) {
 		Preconditions.checkNotNull(id);
 		gs.deleteGroup(id);

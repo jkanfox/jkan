@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Preconditions;
 import com.meiyun.jkan.Constants;
+import com.meiyun.jkan.Context;
+import com.meiyun.jkan.model.GroupModel;
 import com.meiyun.jkan.model.PostsModel;
+import com.meiyun.jkan.service.GroupService;
 import com.meiyun.jkan.service.PostsService;
 import com.meiyun.jkan.utils.FetchUtils;
 import com.meiyun.jkan.utils.FetchUtils.WebModel;
@@ -42,16 +45,20 @@ public class PostsController extends BaseController {
 	@Resource
 	private PostsService ps;
 	
+	@Resource
+	private GroupService gs;
+	
 	/**
 	 * 查询Posts
 	 * @return
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public @ResponseBody Page<PostsModel> findPosts(PostsModel pm,
+	public String findPosts(PostsModel pm, Model model,
 			@RequestParam(defaultValue = "0", required = false) Integer page, 
 			@RequestParam(defaultValue = "50", required = false) Integer size,
 			@RequestParam(required = false) String q) {
-		return ps.findPosts(new PageRequest(page, size));
+		model.addAttribute("c", new Context(ps.findPosts(new PageRequest(page, size))));
+		return "posts/index";
 	}
 	
 	/**
@@ -87,7 +94,8 @@ public class PostsController extends BaseController {
 	 * 跳转到添加Posts页面
 	 */
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
-	public String addPostsPage() {
+	public String addPostsPage(Model model) {
+		model.addAttribute("c", new Context(gs.findGroups(new PageRequest(0, 50))));
 		return "posts/new";
 	}
 	
@@ -98,7 +106,7 @@ public class PostsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public PostsModel addPosts(@RequestParam String url, @RequestParam String title, String description, String tags,
+	public @ResponseBody PostsModel addPosts(@RequestParam String url, @RequestParam String title, String description, String tags,
 			@RequestParam Integer groupId) {
 		return ps.addPosts(PostsModel.create(url, title, description, tags, groupId));
 	}
@@ -109,7 +117,10 @@ public class PostsController extends BaseController {
 	@RequestMapping(value = "/{id}/eidt", method = RequestMethod.GET)
 	public String editPostsPage(@PathVariable Integer id, Model model) {
 		Preconditions.checkNotNull(id);
-		model.addAttribute("pm", ps.findById(id));
+		Context c = new Context(ps.findById(id));
+		Page<GroupModel> pageInfo = gs.findGroups(new PageRequest(0, 50));
+		c.add("groups", pageInfo);
+		model.addAttribute("c", c);
 		return "posts/eidt";
 	}
 	
@@ -127,7 +138,7 @@ public class PostsController extends BaseController {
 	/**
 	 * 根据ID删除Posts
 	 */
-	@RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}/delete", method = {RequestMethod.GET, RequestMethod.POST})
 	public void deletePosts(@PathVariable Integer id) {
 		Preconditions.checkNotNull(id);
 		ps.deletePost(id);

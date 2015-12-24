@@ -50,11 +50,13 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public @ResponseBody Page<GroupModel> findGroups(GroupModel gm, 
+	public String findGroups(GroupModel gm, Model model,
 			@RequestParam(defaultValue = "0", required = false) Integer page, 
 			@RequestParam(defaultValue = "50", required = false) Integer size,
 			@RequestParam(required = false) String q) {
-		return gs.findGroups(new PageRequest(page, size));
+		Page<GroupModel> pageInfo = gs.findGroups(new PageRequest(page, size));
+		model.addAttribute("", pageInfo);
+		return "group/index";
 	}
 	
 	/**

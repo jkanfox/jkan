@@ -2,14 +2,11 @@ package com.meiyun.jkan.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -54,19 +51,13 @@ public class JkanObject implements Serializable {
 	@Column(name = "last_modified")
 	private Timestamp lastModified;
 	
-	/**
-	 * 扩展对象
-	 */
-	@Transient
-	private Map<String, Object> extra;
-	
 	public JkanObject(Integer id) {
 		this();
 		this.id = id;
 	}
 
 	public JkanObject() {
-		extra = new HashMap<>();
+		super();
 	}
 
 	public Integer getId() {
@@ -109,12 +100,4 @@ public class JkanObject implements Serializable {
 		this.lastModified = lastModified;
 	}
 
-	public Map<String, Object> getExtra() {
-		return extra;
-	}
-
-	public void add(String key, Object value) {
-		extra.put(key, value);
-	}
-	
 }

@@ -41,7 +41,7 @@ public final class FetchUtils {
 		try {
 			Preconditions.checkNotNull(url, "URL不能为null.");
 			
-			Document document = buildJsoup(url);
+			Document document = build(url);
 			wm.setTitle(document.title());
 			Element metaKey =  document.select("meta[name=keywords]").first();
 			Element metaDesc = document.select("meta[name=description]").first();
@@ -69,9 +69,19 @@ public final class FetchUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	private static Document buildJsoup(String url) throws IOException {
-		return Jsoup.connect(url).userAgent(USER_AGENT).timeout(TIMEOUT).followRedirects(true).ignoreContentType(true)
-				.ignoreHttpErrors(true).get();
+	private static Document build(String url) throws IOException {
+		try {
+			return Jsoup.connect(url)
+					.userAgent(USER_AGENT)
+					.timeout(TIMEOUT)
+					.followRedirects(true)
+					.ignoreContentType(true)
+					.ignoreHttpErrors(true)
+					.get();
+		} catch (IOException e) {
+			logger.debug("Jsoup抓取失败，使用HttpUtils获取：{}", e.getMessage());
+			return Jsoup.parse(HttpUtils.get(url));
+		}
 	}
 	
 	public class WebModel implements Serializable {

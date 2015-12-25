@@ -114,21 +114,21 @@ public class PostsController extends BaseController {
 	/**
 	 * 跳转到编辑Posts页面
 	 */
-	@RequestMapping(value = "/{id}/eidt", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String editPostsPage(@PathVariable Integer id, Model model) {
 		Preconditions.checkNotNull(id);
 		Context c = new Context(ps.findById(id));
 		Page<GroupModel> pageInfo = gs.findGroups(new PageRequest(0, 50));
 		c.add("groups", pageInfo);
 		model.addAttribute("c", c);
-		return "posts/eidt";
+		return "posts/edit";
 	}
 	
 	/**
 	 * 保存编辑的Posts
 	 */
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-	public PostsModel editPosts(@PathVariable Integer id, PostsModel pm) {
+	public @ResponseBody PostsModel editPosts(@PathVariable Integer id, PostsModel pm) {
 		Preconditions.checkNotNull(id);
 		Preconditions.checkNotNull(pm);
 		Preconditions.checkArgument(id == pm.getId());

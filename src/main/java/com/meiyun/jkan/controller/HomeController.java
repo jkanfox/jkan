@@ -29,7 +29,7 @@ public class HomeController extends BaseController {
 	 */
 	@RequestMapping("/")
 	public void home(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("posts").forward(request, response);
+		request.getRequestDispatcher("/posts").forward(request, response);
 	}
 
 }

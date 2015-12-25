@@ -12,28 +12,36 @@
 </head>
 <body>
 	<form action="/posts/${c.result.id}/edit" method="post">
+	<input type="hidden" name="id" value="${c.result.id}">
+	<input type="hidden" name="name" value="${c.result.name}">
+	<input type="hidden" name="created" value="${c.result.created}">
+	<input type="hidden" name="lastModified" value="${c.result.lastModified}">
 	<ul>
 		<li>
 			<label>链接</label>
-			<input name="url">
+			<input name="url" value="${c.result.url}">
 		</li>
 		<li>
 			<label>名称</label>
-			<input name="title">
+			<input name="title" value="${c.result.title}">
 		</li>
 		<li>
 			<label>描述</label>
-			<input name="description">
+			<input name="description" value="${c.result.description}">
 		</li>
 		<li>
 			<label>标签</label>
-			<input name="tags">
+			<input name="tags" value="${c.result.tags}">
+		</li>
+		<li>
+			<label>状态</label>
+			<input name="state" value="${c.result.state}">
 		</li>
 		<li>
 			<label>分组</label>
-			<select name="groupId">
-				<c:forEach items="${c.result.content}" var="row">
-				<option value="${row.id}">${row.title}</option>
+			<select name="group.id">
+				<c:forEach items="${c.extra.groups.content}" var="row">
+				<option value="${row.id}" <c:if test="${row.id == c.result.group.id}">selected</c:if>>${row.title}</option>
 				</c:forEach>
 			</select>
 		</li>

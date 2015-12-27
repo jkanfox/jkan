@@ -87,7 +87,6 @@
 	<!-- Root Logger -->
 	<root>
 		<priority value="DEBUG" />
-		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="INFO" />
 		<appender-ref ref="ERROR" />
 		<appender-ref ref="WARN" />

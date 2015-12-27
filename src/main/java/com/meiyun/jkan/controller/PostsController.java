@@ -86,8 +86,20 @@ public class PostsController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/fetch", method = {RequestMethod.GET, RequestMethod.POST})
-	public @ResponseBody WebModel fetchByUrl(@RequestParam(required = true) String url) {
-		return FetchUtils.connect(url);
+	public String fetchByUrl(@RequestParam(required = true) String url, Model model) {
+		// Groups
+		Context c = new Context(gs.findGroups(new PageRequest(0, 50)));
+		
+		// Fetch URL
+		WebModel wm = FetchUtils.connect(url);
+		PostsModel pm = new PostsModel();
+		pm.setDescription(wm.getDescription());
+		pm.setTags(wm.getKeywords());
+		pm.setTitle(wm.getTitle());
+		pm.setUrl(wm.getUrl());
+		c.add("info", pm);
+		model.addAttribute("c", c);
+		return "posts/fetch";
 	}
 	
 	/**
@@ -95,7 +107,6 @@ public class PostsController extends BaseController {
 	 */
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String addPostsPage(Model model) {
-		model.addAttribute("c", new Context(gs.findGroups(new PageRequest(0, 50))));
 		return "posts/new";
 	}
 	

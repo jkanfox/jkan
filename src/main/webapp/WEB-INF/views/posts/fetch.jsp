@@ -11,11 +11,31 @@
     <title>添加Posts</title>
 </head>
 <body>
-	<form action="/posts/fetch" method="get">
+	<form action="/posts/new" method="post">
 	<ul>
 		<li>
 			<label>链接</label>
-			<input name="url">
+			<input name="url" value="${c.extra.info.url}">
+		</li>
+		<li>
+			<label>名称</label>
+			<input name="title" value="${c.extra.info.title}">
+		</li>
+		<li>
+			<label>描述</label>
+			<input name="description" value="${c.extra.info.description}">
+		</li>
+		<li>
+			<label>标签</label>
+			<input name="tags" value="${c.extra.info.tags}">
+		</li>
+		<li>
+			<label>分组</label>
+			<select name="groupId">
+				<c:forEach items="${c.result.content}" var="row">
+				<option value="${row.id}">${row.title}</option>
+				</c:forEach>
+			</select>
 		</li>
 		<li>
 			<input type="submit">

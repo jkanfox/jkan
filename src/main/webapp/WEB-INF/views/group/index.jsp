@@ -11,6 +11,8 @@
     <title>分组列表</title>
 </head>
 <body>
+	<h4><a href="/groups/new">ADD GROUPS</a></h4>
+
 	<ul>
 		<c:forEach items="${c.result.content}" var="row">
 		<li><a href="/groups/${row.id}/posts">${row.title}</a></li>

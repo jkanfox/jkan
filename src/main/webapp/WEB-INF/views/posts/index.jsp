@@ -11,6 +11,8 @@
     <title>Posts List</title>
 </head>
 <body>
+	<h4><a href="/posts/new">ADD POSTS</a></h4>
+
 	<c:if test="${c.extra.flag}">
 	<h2>${c.extra.group.title}</h2>
 	</c:if>

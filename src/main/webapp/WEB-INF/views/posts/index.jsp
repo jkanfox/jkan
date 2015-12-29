@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://meisher.com/jkan/taglib" prefix="my" %>
-<my:header title="Post List"/>
+<my:header title="Posts"/>
 
 <div class="container clearfix">
 	<c:if test="${c.extra.flag}">
@@ -11,11 +11,11 @@
 </div>
 	
 <div class="container">
-	<ol>
+	<ul class="list-unstyled">
 		<c:forEach items="${c.result.content}" var="row">
 		<li><a href="${row.url}" target="_blank">${row.title}</a></li>
 		</c:forEach>
-	</ol>
+	</ul>
 </div>
 	
 <my:footer/>

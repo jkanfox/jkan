@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://meisher.com/jkan/taglib" prefix="my" %>
-<my:header title="Insert you title"/>
+<my:header title="Edit Posts"/>
 
 <div class="container">
 	<form action="/posts/${c.result.id}/edit" method="post">

@@ -43,12 +43,13 @@ public class JkanObject implements Serializable {
 	/**
 	 * 创建时间
 	 */
+	@Column(updatable = false)
 	private Timestamp created;
 	
 	/**
 	 * 最近更新时间
 	 */
-	@Column(name = "last_modified")
+	@Column(name = "last_modified", updatable = false)
 	private Timestamp lastModified;
 	
 	public JkanObject(Integer id) {

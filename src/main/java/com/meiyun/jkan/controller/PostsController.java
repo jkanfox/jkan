@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.base.Preconditions;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.Context;
+import com.meiyun.jkan.annotation.LoginUser;
 import com.meiyun.jkan.model.GroupModel;
 import com.meiyun.jkan.model.PostsModel;
 import com.meiyun.jkan.service.GroupService;
@@ -52,6 +53,7 @@ public class PostsController extends BaseController {
 	 * 查询Posts
 	 * @return
 	 */
+	@LoginUser
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String findPosts(PostsModel pm, Model model,
 			@RequestParam(defaultValue = "0", required = false) Integer page, 

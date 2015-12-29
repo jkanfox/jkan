@@ -31,5 +31,29 @@ public class HomeController extends BaseController {
 	public void home(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/posts").forward(request, response);
 	}
+	
+	/**
+	 * 用户登录页
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	@RequestMapping("/login")
+	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/user/login").forward(request, response);
+	}
+	
+	/**
+	 * 用户注册
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	@RequestMapping("/regist")
+	public void regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/user/regist").forward(request, response);
+	}
 
 }

@@ -26,6 +26,14 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- Interceptors Settings -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="globalInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	<!-- Resolves JSON views by FastJSON -->
 	<annotation-driven>
 		<message-converters>

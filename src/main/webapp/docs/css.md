@@ -5,7 +5,6 @@ table of contents](TOC.md)
 
 HTML5 Boilerplate's CSS includes:
 
-* [Normalize.css](#normalizecss)
 * [Useful defaults](#useful-defaults)
 * [Common helpers](#common-helpers)
 * [Placeholder media queries](#media-queries)

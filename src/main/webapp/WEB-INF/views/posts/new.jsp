@@ -1,26 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html class="no-js" lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <title>添加Posts</title>
-</head>
-<body>
+<%@ taglib uri="http://meisher.com/jkan/taglib" prefix="my" %>
+<my:header title="Insert you title"/>
+
+<div class="container">
 	<form action="/posts/fetch" method="get">
-	<ul>
-		<li>
-			<label>链接</label>
-			<input name="url">
-		</li>
-		<li>
-			<input type="submit">
-		</li>
-	</ul>
+	  <fieldset class="form-group">
+	    <label for="url">链接</label>
+	    <input class="form-control" id="url" name="url" placeholder="http(s)://">
+	    <small class="text-muted">请输入一个有效的URL链接地址.</small>
+	  </fieldset>
+	  <button type="submit" class="btn btn-primary">确定</button>
 	</form>
-</body>
-</html>
+</div>
+<my:footer/>

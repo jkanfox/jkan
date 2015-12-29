@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>JKAN JSP Tag Library</description>
+	<tlib-version>3.0</tlib-version>
+	<short-name>my</short-name>
+	<uri>http://meisher.com/jkan/taglib</uri>
+
+	<tag>
+		<name>header</name>
+		<tag-class>com.meiyun.jkan.taglib.HeaderTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+		  <name>title</name>
+		  <required>true</required>
+		  <rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+		  <name>description</name>
+		  <required>false</required>
+		  <rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+		  <name>tags</name>
+		  <required>false</required>
+		  <rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>footer</name>
+		<tag-class>com.meiyun.jkan.taglib.FooterTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+		  <name>scripts</name>
+		  <required>false</required>
+		  <rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+</taglib>

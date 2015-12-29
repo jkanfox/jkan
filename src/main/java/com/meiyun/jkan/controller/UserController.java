@@ -2,6 +2,7 @@ package com.meiyun.jkan.controller;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -12,6 +13,15 @@ import com.meiyun.jkan.model.UserModel;
 @Scope(Constants.SCOPE)
 @RequestMapping("/user")
 public class UserController extends BaseController {
+	
+	/**
+	 * 用户主页
+	 * @return
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String dashboard() {
+		return "user/index";
+	}
 	
 	/**
 	 * 用户登录
@@ -65,6 +75,24 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
 	public String forgot(UserModel user) {
 		return "user/forgot";
+	}
+	
+	/**
+	 * 用户设置
+	 * @return
+	 */
+	@RequestMapping(value = "{id}/settings", method = RequestMethod.GET)
+	public String settings(@PathVariable Integer id) {
+		return "user/settings";
+	}
+	
+	/**
+	 * 用户设置
+	 * @return
+	 */
+	@RequestMapping(value = "{id}/settings", method = RequestMethod.POST)
+	public String doSettings(@PathVariable Integer id) {
+		return "user/settings";
 	}
 
 }

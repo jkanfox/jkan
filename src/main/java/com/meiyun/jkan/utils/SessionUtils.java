@@ -30,6 +30,15 @@ public class SessionUtils {
 		session.setMaxInactiveInterval(interval);
 		return session;
 	}
+	
+	/**
+	 * 获取对象
+	 * @param key
+	 * @return
+	 */
+	public static Object get(String key) {
+		return get().getAttribute(key);
+	}
 
 	public static void set(HttpSession session) {
 		_theadLocal.set(session);

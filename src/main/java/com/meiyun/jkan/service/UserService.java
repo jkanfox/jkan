@@ -25,7 +25,7 @@ public interface UserService {
 	 * @param password
 	 * @return
 	 */
-	UserModel login(String name, String password);
+	void login(String name, String password) throws Exception;
 	
 	/**
 	 * 校验邮箱

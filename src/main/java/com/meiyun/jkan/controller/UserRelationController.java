@@ -1,5 +1,7 @@
 package com.meiyun.jkan.controller;
 
+import java.util.Enumeration;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.Context;
 import com.meiyun.jkan.model.UserModel;
 import com.meiyun.jkan.service.UserService;
+import com.meiyun.jkan.utils.SessionUtils;
 
 /**
  * 用户相关的操作：登录，注册，找回密码
@@ -36,19 +40,21 @@ public class UserRelationController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
+	public String loginPage() {
 		return "user/login";
 	}
 	
 	/**
 	 * 用户登录
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public @ResponseBody UserModel login(
+	public @ResponseBody Context login(
 			@RequestParam String name, 
-			@RequestParam String password) {
-		return us.login(name, password);
+			@RequestParam String password) throws Exception {
+		us.login(name, password);
+		return new Context("登录成功");
 	}
 	
 	/**
@@ -56,7 +62,7 @@ public class UserRelationController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
-	public String regist() {
+	public String registPage() {
 		return "user/regist";
 	}
 	
@@ -77,7 +83,7 @@ public class UserRelationController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/forgot", method = RequestMethod.GET)
-	public String forgot() {
+	public String forgotPage() {
 		return "user/forgot";
 	}
 	
@@ -94,6 +100,16 @@ public class UserRelationController extends BaseController {
 			c.setError("邮箱不存在");
 		}
 		return c;
+	}
+	
+	@RequestMapping("/sessions")
+	public void sessions() {
+		Enumeration<String> es = SessionUtils.get().getAttributeNames();
+		while (es.hasMoreElements()) {
+			String string = es.nextElement();
+			Object value = SessionUtils.get().getAttribute(string);
+			logger.info("{}, is: {}", string, JSON.toJSONString(value) );
+		}
 	}
 	
 }

@@ -6,10 +6,14 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.google.common.base.Preconditions;
+import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.model.UserModel;
 import com.meiyun.jkan.repository.UserRepository;
 import com.meiyun.jkan.service.UserService;
 import com.meiyun.jkan.utils.SecurityUtils;
+import com.meiyun.jkan.utils.SessionUtils;
+import com.meiyun.jkan.utils.ValidateUtils;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,17 +27,29 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserModel login(String name, String password) {
-		List<UserModel> list = ur.findByName(name);
-		if (list != null) {
-			for (UserModel userModel : list) {
-				String pass = SecurityUtils.encryptPassword(userModel.getSalt(), password);
-				if (pass.equals(userModel.getPassword())) {
-					return userModel;
-				}
-			}
+	public void login(String name, String password) throws Exception {
+		Preconditions.checkNotNull(name);
+		Preconditions.checkNotNull(password);
+		List<UserModel> list = null;
+		
+		if (ValidateUtils.checkEmail(name)) { // 邮箱登录
+			list = ur.findByEmail(name);
+		} else { // 用户名登录
+			list = ur.findByName(name);
 		}
-		return null;
+		
+		if (list == null || list.isEmpty()) {
+			throw new Exception("用户名或邮箱不存在");
+		}
+		
+		final UserModel um = list.get(0);
+		String pass = SecurityUtils.encryptPassword(um.getSalt(), password);
+		if (!pass.equals(um.getPassword())) {
+			throw new Exception("用户名或密码错误");
+		}
+		
+		// 登录成功:添加到Session
+		SessionUtils.add(Constants.AUTH_USER, um, 1000 * 3600 * 24);
 	}
 
 	@Override

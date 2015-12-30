@@ -2,7 +2,6 @@ package com.meiyun.jkan.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +47,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
 		// 设置Session
-		SessionUtils.setSession(request.getSession());
+		SessionUtils.set(request.getSession());
 		return true;
 	}
 

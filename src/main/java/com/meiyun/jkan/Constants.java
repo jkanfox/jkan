@@ -20,5 +20,10 @@ public interface Constants {
 	 * FreeMarker模块路径
 	 */
 	public String FM_TEMPLATE_PATH = "/WEB-INF/templates/";
+	
+	/**
+	 * 登录用户授权
+	 */
+	public String AUTH_USER = "authuser";
 
 }

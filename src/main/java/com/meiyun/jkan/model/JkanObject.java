@@ -33,6 +33,7 @@ public class JkanObject implements Serializable {
 	 * 名称
 	 */
 	@NotNull
+	@Column(unique = true)
 	private String name;
 	
 	/**
@@ -41,15 +42,15 @@ public class JkanObject implements Serializable {
 	private Integer state;
 	
 	/**
-	 * 创建时间
+	 * 创建时间：由数据库管理
 	 */
-	@Column(updatable = false)
+	@Column(updatable = false, insertable = false)
 	private Timestamp created;
 	
 	/**
-	 * 最近更新时间
+	 * 最近更新时间：由数据库管理
 	 */
-	@Column(name = "last_modified", updatable = false)
+	@Column(name = "last_modified", updatable = false, insertable = false)
 	private Timestamp lastModified;
 	
 	public JkanObject(Integer id) {

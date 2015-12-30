@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
- * 安全工具类
+ * SecurityUtils: 工具类
  * @author larry.qi
  */
 public class SecurityUtils {

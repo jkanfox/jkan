@@ -5,5 +5,5 @@ package com.meiyun.jkan.controller;
  * @author larry.qi
  */
 public abstract class BaseController {
-	
+
 }

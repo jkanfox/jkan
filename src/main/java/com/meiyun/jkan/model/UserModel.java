@@ -56,6 +56,7 @@ public class UserModel extends JkanObject {
 	 * 盐：密码盐
 	 */
 	@NotNull
+	@Column(updatable = false)
 	private String salt;
 
 	/**

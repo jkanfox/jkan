@@ -1,88 +1,51 @@
 package com.meiyun.jkan.controller;
 
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.base.Preconditions;
 import com.meiyun.jkan.Constants;
+import com.meiyun.jkan.Context;
 import com.meiyun.jkan.model.UserModel;
+import com.meiyun.jkan.service.UserService;
 
 @Controller
 @Scope(Constants.SCOPE)
-@RequestMapping("/user")
+@RequestMapping("/user/{id}")
 public class UserController extends BaseController {
+	
+	static Logger logger = LoggerFactory.getLogger(UserController.class);
+	
+	@Resource
+	private UserService us;
 	
 	/**
 	 * 用户主页
 	 * @return
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String dashboard() {
 		return "user/index";
 	}
 	
 	/**
-	 * 用户登录
-	 * @return
-	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "user/login";
-	}
-	
-	/**
-	 * 用户登录
-	 * @return
-	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(UserModel user) {
-		return "user/login";
-	}
-	
-	/**
-	 * 用户注册
-	 * @return
-	 */
-	@RequestMapping(value = "/regist", method = RequestMethod.GET)
-	public String regist() {
-		return "user/regist";
-	}
-	
-	/**
-	 * 用户注册
-	 * @return
-	 */
-	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String regist(UserModel user) {
-		return "user/regist";
-	}
-	
-	/**
-	 * 忘记密码
-	 * @return
-	 */
-	@RequestMapping(value = "/forgot", method = RequestMethod.GET)
-	public String forgot() {
-		return "user/forgot";
-	}
-	
-	/**
-	 * 忘记密码
-	 * @return
-	 */
-	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
-	public String forgot(UserModel user) {
-		return "user/forgot";
-	}
-	
-	/**
 	 * 用户设置
 	 * @return
 	 */
-	@RequestMapping(value = "{id}/settings", method = RequestMethod.GET)
-	public String settings(@PathVariable Integer id) {
+	@RequestMapping(value = "/settings", method = RequestMethod.GET)
+	public String settings(@PathVariable Integer id, Model model) {
+		Context c = new Context(us.findById(id));
+		model.addAttribute("c", c);
+		model.addAttribute("id", id);
 		return "user/settings";
 	}
 	
@@ -90,9 +53,10 @@ public class UserController extends BaseController {
 	 * 用户设置
 	 * @return
 	 */
-	@RequestMapping(value = "{id}/settings", method = RequestMethod.POST)
-	public String doSettings(@PathVariable Integer id) {
-		return "user/settings";
+	@RequestMapping(value = "/settings", method = RequestMethod.POST)
+	public @ResponseBody UserModel settings(@PathVariable Integer id, UserModel um) {
+		Preconditions.checkArgument(id == um.getId());
+		return us.updateUser(um);
 	}
 
 }

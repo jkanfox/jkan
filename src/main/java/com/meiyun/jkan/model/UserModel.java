@@ -3,7 +3,13 @@ package com.meiyun.jkan.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+
+import com.meiyun.jkan.utils.RequestUtils;
+import com.meiyun.jkan.utils.SecurityUtils;
 
 /**
  * 用户对象
@@ -22,6 +28,18 @@ public class UserModel extends JkanObject {
 	 */
 	@NotNull
 	private String title;
+	
+	/**
+	 * 邮箱
+	 */
+	@Email
+	private String email;
+	
+	/**
+	 * 邮箱是否验证：0=未验证，1=通过验证
+	 */
+	@Column(name = "is_email_set")
+	private Integer isEmailSet;
 
 	/**
 	 * 用户描述
@@ -54,6 +72,27 @@ public class UserModel extends JkanObject {
 
 	public UserModel(Integer id) {
 		super(id);
+	}
+	
+	/**
+	 * 用户注册 构建
+	 * @param name
+	 * @param email
+	 * @param password
+	 * @param request
+	 * @return
+	 */
+	public static UserModel create(String name, String email, String password, HttpServletRequest request) {
+		UserModel um = new UserModel();
+		um.setCreateIp(RequestUtils.getIpAddr(request));
+		um.setName(name);
+		um.setSalt(SecurityUtils.randomSalt());
+		um.setPassword(SecurityUtils.encryptPassword(um.getSalt(), password));
+		um.setState(1); 
+		um.setTitle(name);
+		um.setEmail(email);
+		um.setIsEmailSet(0);
+		return um;
 	}
 
 	public String getTitle() {
@@ -94,6 +133,22 @@ public class UserModel extends JkanObject {
 
 	public void setCreateIp(String createIp) {
 		this.createIp = createIp;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Integer getIsEmailSet() {
+		return isEmailSet;
+	}
+
+	public void setIsEmailSet(Integer isEmailSet) {
+		this.isEmailSet = isEmailSet;
 	}
 
 }

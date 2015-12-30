@@ -81,6 +81,10 @@ public class Context implements Serializable {
 		this.setSuccess(Boolean.FALSE);
 		this.error = error;
 	}
+	
+	public void setError(String message) {
+		this.setError(new Error(message));
+	}
 
 	public Map<String, Object> getExtra() {
 		return (extra.isEmpty() || !success)? null: extra;

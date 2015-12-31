@@ -5,8 +5,8 @@ import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import com.meiyun.jkan.model.GroupModel;
-import com.meiyun.jkan.model.PostsModel;
+import com.meiyun.jkan.model.Group;
+import com.meiyun.jkan.model.Post;
 
 /**
  * 分组
@@ -19,21 +19,21 @@ public interface GroupService {
 	 * 查询Groups
 	 * @return
 	 */
-	Page<GroupModel> findGroups(PageRequest pageRequest);
+	Page<Group> findGroups(PageRequest pageRequest);
 	
 	/**
 	 * 根据ID查询Group
 	 * @param id
 	 * @return
 	 */
-	GroupModel findById(Integer id);
+	Group findById(Integer id);
 	
 	/**
 	 * 根据ID查询所有Posts
 	 * @param id
 	 * @return
 	 */
-	Page<PostsModel> findPostsByGroupId(Integer id, PageRequest pageRequest);
+	Page<Post> findPostsByGroupId(Integer id, PageRequest pageRequest);
 	
 	/**
 	 * 检测名称是否可用
@@ -48,14 +48,14 @@ public interface GroupService {
 	 * @return
 	 * @throws Exception
 	 */
-	GroupModel addGroup(GroupModel group) throws Exception;
+	Group addGroup(Group group) throws Exception;
 	
 	/**
 	 * 更新Group
 	 * @param group
 	 * @return
 	 */
-	GroupModel updateGroup(GroupModel group);
+	Group updateGroup(Group group);
 	
 	/**
 	 * 删除Group

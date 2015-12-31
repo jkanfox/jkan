@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Preconditions;
+import com.jkanfox.jkan.utils.http.FetchUtils;
+import com.jkanfox.jkan.utils.http.FetchUtils.WebModel;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.Context;
 import com.meiyun.jkan.annotation.LoginUser;
-import com.meiyun.jkan.model.GroupModel;
-import com.meiyun.jkan.model.PostsModel;
+import com.meiyun.jkan.model.Group;
+import com.meiyun.jkan.model.Post;
 import com.meiyun.jkan.service.GroupService;
 import com.meiyun.jkan.service.PostsService;
-import com.meiyun.jkan.utils.FetchUtils;
-import com.meiyun.jkan.utils.FetchUtils.WebModel;
 
 /**
  * <ul>
@@ -55,7 +55,7 @@ public class PostsController extends BaseController {
 	 */
 	@LoginUser
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String findPosts(PostsModel pm, Model model,
+	public String findPosts(Post pm, Model model,
 			@RequestParam(defaultValue = "0", required = false) Integer page, 
 			@RequestParam(defaultValue = "50", required = false) Integer size,
 			@RequestParam(required = false) String q) {
@@ -69,7 +69,7 @@ public class PostsController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody PostsModel findById(@PathVariable Integer id) {
+	public @ResponseBody Post findById(@PathVariable Integer id) {
 		Preconditions.checkNotNull(id);
 		return ps.findById(id);
 	}
@@ -94,7 +94,7 @@ public class PostsController extends BaseController {
 		
 		// Fetch URL
 		WebModel wm = FetchUtils.connect(url);
-		PostsModel pm = new PostsModel();
+		Post pm = new Post();
 		pm.setDescription(wm.getDescription());
 		pm.setTags(wm.getKeywords());
 		pm.setTitle(wm.getTitle());
@@ -119,9 +119,9 @@ public class PostsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public @ResponseBody PostsModel addPosts(@RequestParam String url, @RequestParam String title, String description, String tags,
+	public @ResponseBody Post addPosts(@RequestParam String url, @RequestParam String title, String description, String tags,
 			@RequestParam Integer groupId) {
-		return ps.addPosts(PostsModel.create(url, title, description, tags, groupId));
+		return ps.addPosts(Post.create(url, title, description, tags, groupId));
 	}
 	
 	/**
@@ -131,7 +131,7 @@ public class PostsController extends BaseController {
 	public String editPostsPage(@PathVariable Integer id, Model model) {
 		Preconditions.checkNotNull(id);
 		Context c = new Context(ps.findById(id));
-		Page<GroupModel> pageInfo = gs.findGroups(new PageRequest(0, 50));
+		Page<Group> pageInfo = gs.findGroups(new PageRequest(0, 50));
 		c.add("groups", pageInfo);
 		model.addAttribute("c", c);
 		return "posts/edit";
@@ -141,7 +141,7 @@ public class PostsController extends BaseController {
 	 * 保存编辑的Posts
 	 */
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-	public @ResponseBody PostsModel editPosts(@PathVariable Integer id, PostsModel pm) {
+	public @ResponseBody Post editPosts(@PathVariable Integer id, Post pm) {
 		Preconditions.checkNotNull(id);
 		Preconditions.checkNotNull(pm);
 		Preconditions.checkArgument(id == pm.getId());

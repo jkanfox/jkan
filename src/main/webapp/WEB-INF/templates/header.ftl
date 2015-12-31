@@ -26,7 +26,7 @@
       <a class="nav-link" href="/groups">GROUPS</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/users">USERS</a>
+      <a class="nav-link" href="/login">USERS</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="/about">ABOUT</a>

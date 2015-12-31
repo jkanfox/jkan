@@ -1,4 +1,4 @@
-package com.meiyun.jkan.ex;
+package com.meiyun.jkan.exception;
 
 /**
  * 

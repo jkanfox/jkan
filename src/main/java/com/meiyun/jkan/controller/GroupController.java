@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.base.Preconditions;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.Context;
-import com.meiyun.jkan.model.GroupModel;
+import com.meiyun.jkan.model.Group;
 import com.meiyun.jkan.service.GroupService;
 
 /**
@@ -50,11 +50,11 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String findGroups(GroupModel gm, Model model,
+	public String findGroups(Group gm, Model model,
 			@RequestParam(defaultValue = "0", required = false) Integer page, 
 			@RequestParam(defaultValue = "50", required = false) Integer size,
 			@RequestParam(required = false) String q) {
-		Page<GroupModel> pageInfo = gs.findGroups(new PageRequest(page, size));
+		Page<Group> pageInfo = gs.findGroups(new PageRequest(page, size));
 		model.addAttribute("c", new Context(pageInfo));
 		return "group/index";
 	}
@@ -65,7 +65,7 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody GroupModel findById(@PathVariable Integer id) {
+	public @ResponseBody Group findById(@PathVariable Integer id) {
 		return gs.findById(id);
 	}
 	
@@ -108,8 +108,8 @@ public class GroupController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping( value = "/new", method = RequestMethod.POST)
-	public @ResponseBody GroupModel addGroup(@RequestParam String title, String description) throws Exception {
-		return gs.addGroup(GroupModel.create(title, description));
+	public @ResponseBody Group addGroup(@RequestParam String title, String description) throws Exception {
+		return gs.addGroup(Group.create(title, description));
 	}
 	
 	/**
@@ -129,7 +129,7 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}/edit", method = {RequestMethod.POST})
-	public @ResponseBody GroupModel editGroup(@PathVariable Integer id, GroupModel gm) {
+	public @ResponseBody Group editGroup(@PathVariable Integer id, Group gm) {
 		Preconditions.checkNotNull(id);
 		Preconditions.checkNotNull(gm);
 		Preconditions.checkArgument(id == gm.getId());

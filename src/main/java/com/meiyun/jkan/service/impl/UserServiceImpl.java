@@ -7,13 +7,13 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
+import com.jkanfox.jkan.utils.security.SecurityUtils;
+import com.jkanfox.jkan.utils.validation.ValidateUtils;
 import com.meiyun.jkan.Constants;
-import com.meiyun.jkan.model.UserModel;
+import com.meiyun.jkan.model.sys.User;
 import com.meiyun.jkan.repository.UserRepository;
 import com.meiyun.jkan.service.UserService;
-import com.meiyun.jkan.utils.SecurityUtils;
 import com.meiyun.jkan.utils.SessionUtils;
-import com.meiyun.jkan.utils.ValidateUtils;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository ur;
 
 	@Override
-	public UserModel regist(UserModel user) {
+	public User regist(User user) {
 		return ur.saveAndFlush(user);
 	}
 
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 	public void login(String name, String password) throws Exception {
 		Preconditions.checkNotNull(name);
 		Preconditions.checkNotNull(password);
-		List<UserModel> list = null;
+		List<User> list = null;
 		
 		if (ValidateUtils.checkEmail(name)) { // 邮箱登录
 			list = ur.findByEmail(name);
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 			throw new Exception("用户名或邮箱不存在");
 		}
 		
-		final UserModel um = list.get(0);
+		final User um = list.get(0);
 		String pass = SecurityUtils.encryptPassword(um.getSalt(), password);
 		if (!pass.equals(um.getPassword())) {
 			throw new Exception("用户名或密码错误");
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean checkEmail(String email) {
-		List<UserModel> list = ur.findByEmail(email);
+		List<User> list = ur.findByEmail(email);
 		if (list != null && list.size() > 0) {
 			return true;
 		}
@@ -62,13 +62,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserModel findById(Integer id) {
+	public User findById(Integer id) {
 		return ur.findOne(id);
 	}
 
 	@Override
-	public UserModel updateUser(UserModel um) {
+	public User updateUser(User um) {
 		return ur.saveAndFlush(um);
+	}
+
+	@Override
+	public User findByName(String name) {
+		List<User> list = ur.findByName(name);
+		if (list == null || list.isEmpty()) {
+			return null;
+		}
+		
+		return list.get(0);
 	}
 
 }

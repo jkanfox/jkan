@@ -1,4 +1,4 @@
-package com.meiyun.jkan.model;
+package com.meiyun.jkan.model.sys;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,18 +8,17 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.jkanfox.jkan.utils.security.SecurityUtils;
+import com.meiyun.jkan.model.JkanObject;
 import com.meiyun.jkan.utils.RequestUtils;
-import com.meiyun.jkan.utils.SecurityUtils;
 
 /**
- * 用户对象
- * 
+ * 用户表
  * @author larry.qi
- *
  */
 @Entity
-@Table(name = "t_user")
-public class UserModel extends JkanObject {
+@Table(name = "sys_users")
+public class User extends JkanObject {
 
 	private static final long serialVersionUID = 7115721912538842709L;
 
@@ -64,14 +63,12 @@ public class UserModel extends JkanObject {
 	 */
 	@Column(updatable = false, name = "create_ip")
 	private String createIp;
-	
-	
 
-	public UserModel() {
+	public User() {
 		super();
 	}
 
-	public UserModel(Integer id) {
+	public User(Integer id) {
 		super(id);
 	}
 	
@@ -83,8 +80,8 @@ public class UserModel extends JkanObject {
 	 * @param request
 	 * @return
 	 */
-	public static UserModel create(String name, String email, String password, HttpServletRequest request) {
-		UserModel um = new UserModel();
+	public static User create(String name, String email, String password, HttpServletRequest request) {
+		User um = new User();
 		um.setCreateIp(RequestUtils.getIpAddr(request));
 		um.setName(name);
 		um.setSalt(SecurityUtils.randomSalt());

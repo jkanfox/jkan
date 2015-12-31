@@ -2,7 +2,7 @@ package com.meiyun.jkan.service;
 
 import javax.transaction.Transactional;
 
-import com.meiyun.jkan.model.UserModel;
+import com.meiyun.jkan.model.sys.User;
 
 /**
  * 用户 服务
@@ -17,7 +17,7 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	UserModel regist(UserModel user);
+	User regist(User user);
 	
 	/**
 	 * 用户登录
@@ -39,13 +39,20 @@ public interface UserService {
 	 * @param id
 	 * @return
 	 */
-	UserModel findById(Integer id);
+	User findById(Integer id);
 	
 	/**
 	 * 更新用户 
 	 * @param um
 	 * @return
 	 */
-	UserModel updateUser(UserModel um);
+	User updateUser(User um);
+	
+	/**
+	 * 查询用户 
+	 * @param name
+	 * @return
+	 */
+	User findByName(String name);
 
 }

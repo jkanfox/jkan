@@ -16,7 +16,7 @@ import com.google.common.base.Preconditions;
  */
 @Entity
 @Table(name = "t_posts")
-public class PostsModel extends JkanObject {
+public class Post extends JkanObject {
 
 	private static final long serialVersionUID = -8211070089673828572L;
 	
@@ -46,13 +46,13 @@ public class PostsModel extends JkanObject {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "group_id")
-	private GroupModel group;
+	private Group group;
 	
-	public PostsModel() {
+	public Post() {
 		super();
 	}
 
-	public PostsModel(Integer id) {
+	public Post(Integer id) {
 		super(id);
 	}
 	
@@ -65,12 +65,12 @@ public class PostsModel extends JkanObject {
 	 * @param groupId
 	 * @return
 	 */
-	public static PostsModel create(String url, String title, String description, String tags, Integer groupId) {
+	public static Post create(String url, String title, String description, String tags, Integer groupId) {
 		Preconditions.checkNotNull(url);
 		Preconditions.checkNotNull(title);
 		Preconditions.checkNotNull(groupId);
 
-		PostsModel pm = new PostsModel();
+		Post pm = new Post();
 		pm.setDescription(description);
 		pm.setGroup(1);
 		pm.setName(UUID.randomUUID().toString());
@@ -114,16 +114,16 @@ public class PostsModel extends JkanObject {
 		this.url = url;
 	}
 
-	public GroupModel getGroup() {
+	public Group getGroup() {
 		return group;
 	}
 
-	public void setGroup(GroupModel group) {
+	public void setGroup(Group group) {
 		this.group = group;
 	}
 	
 	public void setGroup(Integer id) {
-		this.group = new GroupModel(id);
+		this.group = new Group(id);
 	}
 	
 }

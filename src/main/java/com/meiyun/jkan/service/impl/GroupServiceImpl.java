@@ -10,8 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
-import com.meiyun.jkan.model.GroupModel;
-import com.meiyun.jkan.model.PostsModel;
+import com.meiyun.jkan.model.Group;
+import com.meiyun.jkan.model.Post;
 import com.meiyun.jkan.repository.GroupRepository;
 import com.meiyun.jkan.repository.PostsRespository;
 import com.meiyun.jkan.service.GroupService;
@@ -31,17 +31,17 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public Page<GroupModel> findGroups(PageRequest pageRequest) {
+	public Page<Group> findGroups(PageRequest pageRequest) {
 		return gr.findAll(pageRequest);
 	}
 
 	@Override
-	public GroupModel findById(Integer id) {
+	public Group findById(Integer id) {
 		return gr.findOne(id);
 	}
 
 	@Override
-	public Page<PostsModel> findPostsByGroupId(Integer id, PageRequest pageRequest) {
+	public Page<Post> findPostsByGroupId(Integer id, PageRequest pageRequest) {
 		Preconditions.checkNotNull(id);
 		return pr.findPostsByGroupId(id, pageRequest);
 	}
@@ -49,19 +49,19 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public boolean checkGroup(String title) {
 		Preconditions.checkNotNull(title);
-		List<GroupModel> list = gr.findByTitle(title);
+		List<Group> list = gr.findByTitle(title);
 		return list != null && !list.isEmpty();
 	}
 
 	@Override
-	public GroupModel addGroup(GroupModel group) throws Exception {
+	public Group addGroup(Group group) throws Exception {
 		Preconditions.checkNotNull(group);
 		Preconditions.checkArgument(group.getId() == null);
 		return gr.save(group);
 	}
 
 	@Override
-	public GroupModel updateGroup(GroupModel group) {
+	public Group updateGroup(Group group) {
 		Preconditions.checkNotNull(group);
 		Preconditions.checkNotNull(group.getId());
 		return gr.save(group);

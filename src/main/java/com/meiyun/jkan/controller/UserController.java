@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.base.Preconditions;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.Context;
-import com.meiyun.jkan.model.UserModel;
+import com.meiyun.jkan.model.sys.User;
 import com.meiyun.jkan.service.UserService;
 
 @Controller
@@ -54,7 +54,7 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/settings", method = RequestMethod.POST)
-	public @ResponseBody UserModel settings(@PathVariable Integer id, UserModel um) {
+	public @ResponseBody User settings(@PathVariable Integer id, User um) {
 		Preconditions.checkArgument(id == um.getId());
 		return us.updateUser(um);
 	}

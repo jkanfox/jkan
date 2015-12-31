@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
-import com.meiyun.jkan.model.PostsModel;
+import com.meiyun.jkan.model.Post;
 import com.meiyun.jkan.repository.PostsRespository;
 import com.meiyun.jkan.service.PostsService;
 
@@ -20,31 +20,31 @@ public class PostsServiceImpl implements PostsService {
 	private PostsRespository pr;
 
 	@Override
-	public Page<PostsModel> findPosts(PageRequest pageRequest) {
+	public Page<Post> findPosts(PageRequest pageRequest) {
 		return pr.findAll(pageRequest);
 	}
 
 	@Override
-	public PostsModel findById(Integer id) {
+	public Post findById(Integer id) {
 		return pr.findOne(id);
 	}
 
 	@Override
 	public boolean checkPost(String title) {
 		Preconditions.checkNotNull(title);
-		List<PostsModel> list = pr.findByTitle(title);
+		List<Post> list = pr.findByTitle(title);
 		return list != null && !list.isEmpty();
 	}
 
 	@Override
-	public PostsModel addPosts(PostsModel posts) {
+	public Post addPosts(Post posts) {
 		Preconditions.checkNotNull(posts);
 		Preconditions.checkArgument(posts.getId() == null);
 		return pr.save(posts);
 	}
 
 	@Override
-	public PostsModel updatePosts(PostsModel posts) {
+	public Post updatePosts(Post posts) {
 		Preconditions.checkNotNull(posts);
 		Preconditions.checkArgument(posts.getId() != null);
 		return pr.save(posts);

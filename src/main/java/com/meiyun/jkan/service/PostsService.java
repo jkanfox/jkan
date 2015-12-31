@@ -5,7 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import com.meiyun.jkan.model.PostsModel;
+import com.meiyun.jkan.model.Post;
 
 /**
  * 帖子
@@ -18,14 +18,14 @@ public interface PostsService {
 	 * 查询Posts
 	 * @return
 	 */
-	Page<PostsModel> findPosts(PageRequest pageRequest);
+	Page<Post> findPosts(PageRequest pageRequest);
 	
 	/**
 	 * 根据ID查询Posts
 	 * @param id
 	 * @return
 	 */
-	PostsModel findById(Integer id);
+	Post findById(Integer id);
 	
 	/**
 	 * 检验Posts
@@ -38,14 +38,14 @@ public interface PostsService {
 	 * @param posts
 	 * @return
 	 */
-	PostsModel addPosts(PostsModel posts);
+	Post addPosts(Post posts);
 	
 	/**
 	 * 更新Posts
 	 * @param posts
 	 * @return
 	 */
-	PostsModel updatePosts(PostsModel posts);
+	Post updatePosts(Post posts);
 	
 	/**
 	 * 删除Posts

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.Context;
-import com.meiyun.jkan.model.UserModel;
+import com.meiyun.jkan.model.sys.User;
 import com.meiyun.jkan.service.UserService;
 import com.meiyun.jkan.utils.SessionUtils;
 
@@ -71,11 +71,11 @@ public class UserRelationController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public @ResponseBody UserModel regist(HttpServletRequest request,
+	public @ResponseBody User regist(HttpServletRequest request,
 			@RequestParam String name, 
 			@RequestParam String email, 
 			@RequestParam String password) {
-		return us.regist(UserModel.create(name, email, password, request));
+		return us.regist(User.create(name, email, password, request));
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-package com.meiyun.jkan.ex;
+package com.meiyun.jkan.exception;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

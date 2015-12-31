@@ -14,7 +14,7 @@ import com.google.common.base.Preconditions;
  */
 @Entity
 @Table(name = "t_group")
-public class GroupModel extends JkanObject {
+public class Group extends JkanObject {
 
 	private static final long serialVersionUID = -6791897986703261072L;
 	
@@ -34,11 +34,11 @@ public class GroupModel extends JkanObject {
 	 */
 	private Integer position;
 
-	public GroupModel() {
+	public Group() {
 		super();
 	}
 
-	public GroupModel(Integer id) {
+	public Group(Integer id) {
 		super(id);
 	}
 	
@@ -48,9 +48,9 @@ public class GroupModel extends JkanObject {
 	 * @param description
 	 * @return
 	 */
-	public static GroupModel create(String title, String description) {
+	public static Group create(String title, String description) {
 		Preconditions.checkNotNull(title, "分组名称{title}不能为空。");
-		GroupModel gm = new GroupModel();
+		Group gm = new Group();
 		gm.setDescription(description);
 		gm.setPosition(0);
 		gm.setTitle(title);

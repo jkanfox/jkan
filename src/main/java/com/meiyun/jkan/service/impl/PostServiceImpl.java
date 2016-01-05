@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
 import com.meiyun.jkan.model.Post;
-import com.meiyun.jkan.repository.PostsRespository;
-import com.meiyun.jkan.service.PostsService;
+import com.meiyun.jkan.repository.PostRespository;
+import com.meiyun.jkan.service.PostService;
 
 @Service
-public class PostsServiceImpl implements PostsService {
+public class PostServiceImpl implements PostService {
 	
 	@Resource
-	private PostsRespository pr;
+	private PostRespository pr;
 
 	@Override
 	public Page<Post> findPosts(PageRequest pageRequest) {

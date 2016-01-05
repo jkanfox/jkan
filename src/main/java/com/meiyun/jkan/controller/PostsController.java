@@ -22,7 +22,7 @@ import com.meiyun.jkan.annotation.LoginUser;
 import com.meiyun.jkan.model.Group;
 import com.meiyun.jkan.model.Post;
 import com.meiyun.jkan.service.GroupService;
-import com.meiyun.jkan.service.PostsService;
+import com.meiyun.jkan.service.PostService;
 
 /**
  * <ul>
@@ -44,7 +44,7 @@ import com.meiyun.jkan.service.PostsService;
 public class PostsController extends BaseController {
 	
 	@Resource
-	private PostsService ps;
+	private PostService ps;
 	
 	@Resource
 	private GroupService gs;

@@ -4,7 +4,7 @@
 		<wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="jkan-utils-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jkan-utils/jkan-utils">
+        <dependent-module archiveName="jkan-boot-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jkan-boot/jkan-boot">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="jkan-security-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jkan-security/jkan-security">

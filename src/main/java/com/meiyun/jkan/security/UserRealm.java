@@ -15,7 +15,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import com.meiyun.jkan.model.sys.User;
+import com.meiyun.jkan.model.User;
 import com.meiyun.jkan.service.UserService;
 
 /**

@@ -1,4 +1,4 @@
-package com.meiyun.jkan.model.sys;
+package com.meiyun.jkan.model;
 
 import java.io.Serializable;
 

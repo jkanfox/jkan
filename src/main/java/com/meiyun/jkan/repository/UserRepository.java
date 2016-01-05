@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.meiyun.jkan.model.sys.User;
+import com.meiyun.jkan.model.User;
 
 /**
  * 用户数据中心

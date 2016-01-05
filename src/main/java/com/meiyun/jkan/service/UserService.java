@@ -2,7 +2,7 @@ package com.meiyun.jkan.service;
 
 import javax.transaction.Transactional;
 
-import com.meiyun.jkan.model.sys.User;
+import com.meiyun.jkan.model.User;
 
 /**
  * 用户 服务

@@ -12,7 +12,7 @@ import com.meiyun.jkan.model.Post;
  * @author larry.qi
  */
 @Transactional
-public interface PostsService {
+public interface PostService {
 	
 	/**
 	 * 查询Posts

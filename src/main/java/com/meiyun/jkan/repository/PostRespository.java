@@ -12,7 +12,7 @@ import com.meiyun.jkan.model.Post;
  * 帖子数据中心
  * @author larry.qi
  */
-public interface PostsRespository extends JpaRepository<Post, Integer> {
+public interface PostRespository extends JpaRepository<Post, Integer> {
 
 	/**
 	 * 根据Title查询

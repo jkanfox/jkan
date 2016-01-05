@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.Context;
-import com.meiyun.jkan.model.sys.User;
+import com.meiyun.jkan.model.User;
 import com.meiyun.jkan.service.UserService;
 import com.meiyun.jkan.utils.SessionUtils;
 

@@ -15,7 +15,7 @@ import com.google.common.base.Preconditions;
  * @author larry.qi
  */
 @Entity
-@Table(name = "t_share")
+@Table(name = "t_shares")
 public class Share extends JkanObject {
 
 	private static final long serialVersionUID = -8211070089673828572L;

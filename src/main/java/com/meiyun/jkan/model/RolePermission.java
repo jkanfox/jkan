@@ -1,17 +1,21 @@
-package com.meiyun.jkan.model.sys;
+package com.meiyun.jkan.model;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
+
+import com.meiyun.jkan.model.pk.RolePermissionPK;
 
 /**
  * 角色-权限中间表
  * @author larry.qi
  */
 @Entity
+@IdClass(RolePermissionPK.class)
 @Table(name = "sys_roles_permissions")
 public class RolePermission implements Serializable {
 

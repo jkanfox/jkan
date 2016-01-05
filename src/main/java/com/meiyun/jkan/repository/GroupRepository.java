@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.meiyun.jkan.model.Group;
 
 /**
- * 分组数据中心
+ * 类别数据中心
  * @author larry.qi
  */
 public interface GroupRepository extends JpaRepository<Group, Integer> {

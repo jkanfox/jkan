@@ -10,7 +10,7 @@ import com.google.common.base.Preconditions;
 import com.jkanfox.jkan.boot.security.SecurityUtils;
 import com.jkanfox.jkan.boot.validation.ValidateUtils;
 import com.meiyun.jkan.Constants;
-import com.meiyun.jkan.model.sys.User;
+import com.meiyun.jkan.model.User;
 import com.meiyun.jkan.repository.UserRepository;
 import com.meiyun.jkan.service.UserService;
 import com.meiyun.jkan.utils.SessionUtils;

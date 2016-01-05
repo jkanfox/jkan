@@ -1,13 +1,10 @@
 package com.meiyun.jkan.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.meiyun.jkan.model.base.JkanID;
 
 /**
  * <p>User: Zhang Kaitao
@@ -16,12 +13,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "sys_organizations")
-public class Organization implements Serializable {
+public class Organization extends JkanID {
 
 	private static final long serialVersionUID = -2093721689340681101L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; //编号
     private String name; //组织机构名称
     
     @Column(name = "parent_id")
@@ -31,14 +25,6 @@ public class Organization implements Serializable {
     private String parentIds; //父编号列表，如1/2/
     private Boolean available = Boolean.FALSE;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -80,31 +66,4 @@ public class Organization implements Serializable {
         return getParentIds() + getId() + "/";
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Organization that = (Organization) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
-
-    @Override
-    public String toString() {
-        return "Organization{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", parentId=" + parentId +
-                ", parentIds='" + parentIds + '\'' +
-                ", available=" + available +
-                '}';
-    }
 }

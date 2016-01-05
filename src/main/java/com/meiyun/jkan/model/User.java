@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 
 import com.jkanfox.jkan.boot.security.SecurityUtils;
+import com.meiyun.jkan.model.base.JkanBase;
 import com.meiyun.jkan.utils.RequestUtils;
 
 /**
@@ -17,15 +18,9 @@ import com.meiyun.jkan.utils.RequestUtils;
  */
 @Entity
 @Table(name = "sys_users")
-public class User extends JkanObject {
+public class User extends JkanBase {
 
 	private static final long serialVersionUID = 7115721912538842709L;
-
-	/**
-	 * 用户昵称
-	 */
-	@NotNull
-	private String title;
 	
 	/**
 	 * 邮箱
@@ -38,11 +33,6 @@ public class User extends JkanObject {
 	 */
 	@Column(name = "is_email_set")
 	private Integer isEmailSet;
-
-	/**
-	 * 用户描述
-	 */
-	private String description;
 
 	/**
 	 * 用户密码
@@ -66,11 +56,11 @@ public class User extends JkanObject {
 	public User() {
 		super();
 	}
-
-	public User(Integer id) {
+	
+	public User(Long id) {
 		super(id);
 	}
-	
+
 	/**
 	 * 用户注册 构建
 	 * @param name
@@ -90,22 +80,6 @@ public class User extends JkanObject {
 		um.setEmail(email);
 		um.setIsEmailSet(0);
 		return um;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getPassword() {

@@ -6,9 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.google.common.base.Preconditions;
+import com.meiyun.jkan.model.base.JkanBase;
 
 /**
  * 用户分享表
@@ -16,20 +16,9 @@ import com.google.common.base.Preconditions;
  */
 @Entity
 @Table(name = "t_shares")
-public class Share extends JkanObject {
+public class Share extends JkanBase {
 
 	private static final long serialVersionUID = -8211070089673828572L;
-	
-	/**
-	 * 标题
-	 */
-	@NotNull
-	private String title;
-	
-	/**
-	 * 描述
-	 */
-	private String description;
 	
 	/**
 	 * 标签
@@ -51,11 +40,11 @@ public class Share extends JkanObject {
 	public Share() {
 		super();
 	}
-
-	public Share(Integer id) {
+	
+	public Share(Long id) {
 		super(id);
 	}
-	
+
 	/**
 	 * 创建一个Share对象
 	 * @param url
@@ -65,14 +54,14 @@ public class Share extends JkanObject {
 	 * @param groupId
 	 * @return
 	 */
-	public static Share create(String url, String title, String description, String tags, Integer groupId) {
+	public static Share create(String url, String title, String description, String tags, Long groupId) {
 		Preconditions.checkNotNull(url);
 		Preconditions.checkNotNull(title);
 		Preconditions.checkNotNull(groupId);
 
 		Share pm = new Share();
 		pm.setDescription(description);
-		pm.setGroup(1);
+		pm.setGroup(1L);
 		pm.setName(UUID.randomUUID().toString());
 		pm.setState(1);
 		pm.setTags(tags);
@@ -80,22 +69,6 @@ public class Share extends JkanObject {
 		pm.setUrl(url);
 		pm.setGroup(groupId);
 		return pm;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getTags() {
@@ -122,7 +95,7 @@ public class Share extends JkanObject {
 		this.group = group;
 	}
 	
-	public void setGroup(Integer id) {
+	public void setGroup(Long id) {
 		this.group = new Group(id);
 	}
 	

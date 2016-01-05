@@ -1,13 +1,10 @@
 package com.meiyun.jkan.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.meiyun.jkan.model.base.JkanID;
 
 /**
  * <p>User: Zhang Kaitao
@@ -16,12 +13,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "sys_resources")
-public class Resource implements Serializable {
+public class Resource extends JkanID {
 	private static final long serialVersionUID = 2988039422131137959L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; //编号
     private String name; //资源名称
     private ResourceType type = ResourceType.menu; //资源类型
     private String url; //资源路径
@@ -45,16 +39,6 @@ public class Resource implements Serializable {
         public String getInfo() {
             return info;
         }
-    }
-
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -120,33 +104,5 @@ public class Resource implements Serializable {
     public String makeSelfAsParentIds() {
         return getParentIds() + getId() + "/";
     }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Resource resource = (Resource) o;
-
-        if (id != null ? !id.equals(resource.id) : resource.id != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
-
-    @Override
-    public String toString() {
-        return "Resource{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", permission='" + permission + '\'' +
-                ", parentId=" + parentId +
-                ", parentIds='" + parentIds + '\'' +
-                ", available=" + available +
-                '}';
-    }
 }

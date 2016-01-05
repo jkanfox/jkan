@@ -129,7 +129,7 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}/edit", method = {RequestMethod.POST})
-	public @ResponseBody Group editGroup(@PathVariable Integer id, Group gm) {
+	public @ResponseBody Group editGroup(@PathVariable Long id, Group gm) {
 		Preconditions.checkNotNull(id);
 		Preconditions.checkNotNull(gm);
 		Preconditions.checkArgument(id == gm.getId());

@@ -1,33 +1,19 @@
-package com.meiyun.jkan.model;
+package com.meiyun.jkan.model.base;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 所有Model的基类
  * @author larry.qi
  */
 @MappedSuperclass
-public class JkanObject implements Serializable {
+public abstract class JkanBase extends JkanID {
 
 	private static final long serialVersionUID = -6958384507352480877L;
-	
-	/**
-	 * ID
-	 */
-	@Id
-	@GenericGenerator(name = "generator", strategy = "increment")
-	@GeneratedValue(generator = "generator")
-	@Column(name = "id", length = 11)
-	private Integer id;
 	
 	/**
 	 * 名称
@@ -37,7 +23,18 @@ public class JkanObject implements Serializable {
 	private String name;
 	
 	/**
-	 * 状态 [默认 1=可用，0=不可用]
+	 * 标题
+	 */
+	@NotNull
+	private String title;
+	
+	/**
+	 * 描述
+	 */
+	private String description;
+	
+	/**
+	 * 状态：不同的表状态值不一样
 	 */
 	private Integer state;
 	
@@ -53,21 +50,16 @@ public class JkanObject implements Serializable {
 	@Column(name = "last_modified", updatable = false, insertable = false)
 	private Timestamp lastModified;
 	
-	public JkanObject(Integer id) {
-		this();
-		this.id = id;
+	public JkanBase(String name) {
+		this.name = name;
 	}
 
-	public JkanObject() {
+	public JkanBase(Long id) {
+		super(id);
+	}
+
+	public JkanBase() {
 		super();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -76,6 +68,22 @@ public class JkanObject implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Integer getState() {

@@ -120,7 +120,7 @@ public class PostsController extends BaseController {
 	 */
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public @ResponseBody Post addPosts(@RequestParam String url, @RequestParam String title, String description, String tags,
-			@RequestParam Integer groupId) {
+			@RequestParam Long groupId) {
 		return ps.addPosts(Post.create(url, title, description, tags, groupId));
 	}
 	
@@ -141,7 +141,7 @@ public class PostsController extends BaseController {
 	 * 保存编辑的Posts
 	 */
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-	public @ResponseBody Post editPosts(@PathVariable Integer id, Post pm) {
+	public @ResponseBody Post editPosts(@PathVariable Long id, Post pm) {
 		Preconditions.checkNotNull(id);
 		Preconditions.checkNotNull(pm);
 		Preconditions.checkArgument(id == pm.getId());

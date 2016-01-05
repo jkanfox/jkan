@@ -1,7 +1,5 @@
 package com.meiyun.jkan.controller;
 
-import javax.annotation.Resource;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +54,7 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/settings", method = RequestMethod.POST)
-	public @ResponseBody User settings(@PathVariable Integer id, User um) {
+	public @ResponseBody User settings(@PathVariable Long id, User um) {
 		Preconditions.checkArgument(id == um.getId());
 		return userService.updateUser(um);
 	}

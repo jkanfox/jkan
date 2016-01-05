@@ -4,9 +4,9 @@ import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.google.common.base.Preconditions;
+import com.meiyun.jkan.model.base.JkanBase;
 
 /**
  * 分组
@@ -14,20 +14,9 @@ import com.google.common.base.Preconditions;
  */
 @Entity
 @Table(name = "t_groups")
-public class Group extends JkanObject {
+public class Group extends JkanBase {
 
 	private static final long serialVersionUID = -6791897986703261072L;
-	
-	/**
-	 * 标题
-	 */
-	@NotNull
-	private String title;
-	
-	/**
-	 * 描述
-	 */
-	private String description;
 	
 	/**
 	 * 排序位置
@@ -37,11 +26,15 @@ public class Group extends JkanObject {
 	public Group() {
 		super();
 	}
+	
+	public Group(String name) {
+		super(name);
+	}
 
-	public Group(Integer id) {
+	public Group(Long id) {
 		super(id);
 	}
-	
+
 	/**
 	 * 创建分组
 	 * @param title not null
@@ -57,22 +50,6 @@ public class Group extends JkanObject {
 		gm.setState(1); // 设置状态的默认值为：1
 		gm.setName(UUID.randomUUID().toString());
 		return gm;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public Integer getPosition() {

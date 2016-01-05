@@ -13,7 +13,7 @@ import com.google.common.base.Preconditions;
  * @author larry.qi
  */
 @Entity
-@Table(name = "t_group")
+@Table(name = "t_groups")
 public class Group extends JkanObject {
 
 	private static final long serialVersionUID = -6791897986703261072L;

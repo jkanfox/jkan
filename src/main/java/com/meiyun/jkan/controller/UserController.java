@@ -20,7 +20,7 @@ import com.meiyun.jkan.service.UserService;
 
 @Controller
 @Scope(Constants.SCOPE)
-@RequestMapping("/user/{id}")
+@RequestMapping("/users/{id}")
 public class UserController extends BaseController {
 	
 	static Logger logger = LoggerFactory.getLogger(UserController.class);

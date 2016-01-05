@@ -41,7 +41,7 @@ public class HomeController extends BaseController {
 	 */
 	@RequestMapping("/login")
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/user/login").forward(request, response);
+		request.getRequestDispatcher("/users/login").forward(request, response);
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class HomeController extends BaseController {
 	 */
 	@RequestMapping("/regist")
 	public void regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/user/regist").forward(request, response);
+		request.getRequestDispatcher("/users/regist").forward(request, response);
 	}
 
 }

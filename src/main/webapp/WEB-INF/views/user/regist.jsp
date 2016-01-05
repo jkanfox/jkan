@@ -7,7 +7,7 @@
 
 	<h3>USER REGISTER</h3>
 
-	<form action="/user/regist" method="post">
+	<form action="/users/regist" method="post">
 	  <fieldset class="form-group">
 	    <label for="name">用户名</label>
 	    <input type="text" class="form-control" id="name" name="name" placeholder="用户 名">

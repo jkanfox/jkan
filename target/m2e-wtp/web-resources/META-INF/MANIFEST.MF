@@ -3,7 +3,7 @@ Implementation-Title: jkan
 Implementation-Version: 1.0.0
 Built-By: larry.qi
 Implementation-Vendor-Id: com.jkanfox.jkan
-Build-Jdk: 1.8.0_65
+Build-Jdk: 1.8.0_66
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 

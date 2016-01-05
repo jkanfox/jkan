@@ -4,7 +4,7 @@
 <my:header title="找回密码"/>
 <div class="container">
 	<h3>找回密码</h3>
-	<form action="/user/forgot" method="post">
+	<form action="/users/forgot" method="post">
 	  <fieldset class="form-group">
 	    <label for="name">邮箱</label>
 	    <input type="email" class="form-control" id="email" name="email" placeholder="邮箱">

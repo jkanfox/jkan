@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 
-import com.jkanfox.jkan.utils.security.SecurityUtils;
+import com.jkanfox.jkan.boot.security.SecurityUtils;
 import com.meiyun.jkan.model.JkanObject;
 import com.meiyun.jkan.utils.RequestUtils;
 

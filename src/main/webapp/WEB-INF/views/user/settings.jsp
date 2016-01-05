@@ -5,7 +5,7 @@
 <div class="container">
 	<h3>设置</h3>
 
-	<form action="/user/${id}/settings" method="post">
+	<form action="/users/${id}/settings" method="post">
 	  <input type="hidden" name="id"  value="${c.result.id}">
 	  <input type="hidden" name="isEmailSet"  value="${c.result.isEmailSet}">
 	  <input type="hidden" name="salt"  value="${c.result.salt}">

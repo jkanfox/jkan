@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
-import com.jkanfox.jkan.utils.security.SecurityUtils;
-import com.jkanfox.jkan.utils.validation.ValidateUtils;
+import com.jkanfox.jkan.boot.security.SecurityUtils;
+import com.jkanfox.jkan.boot.validation.ValidateUtils;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.model.sys.User;
 import com.meiyun.jkan.repository.UserRepository;

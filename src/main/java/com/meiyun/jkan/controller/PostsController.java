@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Preconditions;
-import com.jkanfox.jkan.utils.http.FetchUtils;
-import com.jkanfox.jkan.utils.http.FetchUtils.WebModel;
+import com.jkanfox.jkan.boot.http.FetchUtils;
+import com.jkanfox.jkan.boot.http.FetchUtils.WebModel;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.Context;
 import com.meiyun.jkan.annotation.LoginUser;

@@ -27,7 +27,7 @@ import com.meiyun.jkan.utils.SessionUtils;
  */
 @Controller
 @Scope(Constants.SCOPE)
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserRelationController extends BaseController {
 	
 	static Logger logger = LoggerFactory.getLogger(UserController.class);

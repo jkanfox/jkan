@@ -6,7 +6,7 @@
 
 	<h3>USER LOGIN</h3>
 
-	<form action="/user/login" method="post">
+	<form action="/users/login" method="post">
 	  <fieldset class="form-group">
 	    <label for="name">用户名 / 邮箱</label>
 	    <input type="text" class="form-control" id="name" name="name" placeholder="用户名 / 邮箱">

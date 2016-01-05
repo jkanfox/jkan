@@ -12,6 +12,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- <import resource="appServlet/spring-config-cache.xml"/>
+	<import resource="appServlet/spring-config-shiro.xml"/> -->
 	<import resource="appServlet/servlet-context.xml"/>
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	

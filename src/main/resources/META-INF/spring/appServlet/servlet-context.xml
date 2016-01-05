@@ -55,5 +55,5 @@
 			</beans:bean>
 		</message-converters>
 	</annotation-driven>
-	
+
 </beans:beans>

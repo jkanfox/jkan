@@ -25,5 +25,10 @@ public interface Constants {
 	 * 登录用户授权
 	 */
 	public String AUTH_USER = "authuser";
+	
+	/**
+	 * 当前登录用户
+	 */
+	public String CURRENT_USER = "user";
 
 }

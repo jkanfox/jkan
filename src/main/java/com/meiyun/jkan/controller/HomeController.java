@@ -1,16 +1,25 @@
 package com.meiyun.jkan.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.meiyun.jkan.Constants;
+import com.meiyun.jkan.model.Resource;
+import com.meiyun.jkan.model.User;
+import com.meiyun.jkan.security.CurrentUser;
+import com.meiyun.jkan.service.ResourceService;
+import com.meiyun.jkan.service.UserService;
 
 /**
  * Home
@@ -55,5 +64,18 @@ public class HomeController extends BaseController {
 	public void regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/users/regist").forward(request, response);
 	}
+	
+	@Autowired  
+    private ResourceService resourceService;  
+    @Autowired  
+    private UserService userService; 
+    
+    @RequestMapping("/about")  
+    public String about(@CurrentUser User loginUser, Model model) {  
+        Set<String> permissions = userService.findPermissions(loginUser.getName());  
+        List<Resource> menus = resourceService.findMenus(permissions);  
+        model.addAttribute("menus", menus);  
+        return "about";  
+    }  
 
 }

@@ -5,50 +5,50 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.meiyun.jkan.model.Role;
-import com.meiyun.jkan.service.RoleService;
+import com.meiyun.jkan.model.Resource;
+import com.meiyun.jkan.service.ResourceService;
 
 @Service
-public class RoleServiceImpl implements RoleService {
+public class ResourceServiceImpl implements ResourceService {
 
 	@Override
-	public Role createRole(Role role) {
+	public Resource createResource(Resource resource) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Role updateRole(Role role) {
+	public Resource updateResource(Resource resource) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteRole(Long roleId) {
+	public void deleteResource(Long resourceId) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Role findOne(Long roleId) {
+	public Resource findOne(Long resourceId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Role> findAll() {
+	public List<Resource> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Set<String> findRoles(Long... roleIds) {
+	public Set<String> findPermissions(Set<Long> resourceIds) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Set<String> findPermissions(Long[] roleIds) {
+	public List<Resource> findMenus(Set<String> permissions) {
 		// TODO Auto-generated method stub
 		return null;
 	}

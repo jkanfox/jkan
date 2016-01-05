@@ -48,7 +48,11 @@ public class GlobalInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
 		// 设置Session
 		SessionUtils.set(request.getSession());
-		return true;
+		
+		// 系统用户过滤
+		/*String username = (String)SecurityUtils.getSubject().getPrincipal();
+        request.setAttribute(Constants.CURRENT_USER, userService.findByUsername(username));*/
+        return true;
 	}
 
 }

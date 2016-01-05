@@ -1,6 +1,7 @@
 package com.meiyun.jkan.service.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -79,6 +80,54 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return list.get(0);
+	}
+
+	@Override
+	public User createUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteUser(Long userId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changePassword(Long userId, String newPassword) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public User findOne(Long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> findRoles(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> findPermissions(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

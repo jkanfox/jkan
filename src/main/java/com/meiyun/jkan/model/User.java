@@ -147,5 +147,9 @@ public class User extends JkanObject {
 	public void setIsEmailSet(Integer isEmailSet) {
 		this.isEmailSet = isEmailSet;
 	}
+	
+	public String getCredentialsSalt() {
+        return super.getName() + salt;
+    }
 
 }

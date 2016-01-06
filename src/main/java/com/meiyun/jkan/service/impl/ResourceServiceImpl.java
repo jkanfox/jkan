@@ -5,20 +5,20 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.meiyun.jkan.model.Resource;
+import com.meiyun.jkan.model.MResource;
 import com.meiyun.jkan.service.ResourceService;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {
 
 	@Override
-	public Resource createResource(Resource resource) {
+	public MResource createResource(MResource resource) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Resource updateResource(Resource resource) {
+	public MResource updateResource(MResource resource) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -30,13 +30,13 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public Resource findOne(Long resourceId) {
+	public MResource findOne(Long resourceId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Resource> findAll() {
+	public List<MResource> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -48,7 +48,7 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public List<Resource> findMenus(Set<String> permissions) {
+	public List<MResource> findMenus(Set<String> permissions) {
 		// TODO Auto-generated method stub
 		return null;
 	}

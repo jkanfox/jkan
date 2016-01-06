@@ -15,7 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.meiyun.jkan.Constants;
-import com.meiyun.jkan.model.Resource;
+import com.meiyun.jkan.model.MResource;
 import com.meiyun.jkan.model.User;
 import com.meiyun.jkan.security.CurrentUser;
 import com.meiyun.jkan.service.ResourceService;
@@ -73,7 +73,7 @@ public class HomeController extends BaseController {
     @RequestMapping("/about")  
     public String about(@CurrentUser User loginUser, Model model) {  
         Set<String> permissions = userService.findPermissions(loginUser.getName());  
-        List<Resource> menus = resourceService.findMenus(permissions);  
+        List<MResource> menus = resourceService.findMenus(permissions);  
         model.addAttribute("menus", menus);  
         return "about";  
     }  

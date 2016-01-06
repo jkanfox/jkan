@@ -38,12 +38,12 @@ public class PasswordHelper {
 
     public void encryptPassword(User user) {
 
-        user.setSalt(randomNumberGenerator.nextBytes().toHex());
+    	user.setAccessKey(randomNumberGenerator.nextBytes().toHex());
 
         String newPassword = new SimpleHash(
                 algorithmName,
                 user.getPassword(),
-                ByteSource.Util.bytes(user.getCredentialsSalt()),
+                ByteSource.Util.bytes(user.getAccessKey()),
                 hashIterations).toHex();
 
         user.setPassword(newPassword);

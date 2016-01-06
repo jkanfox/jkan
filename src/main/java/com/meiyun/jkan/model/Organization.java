@@ -2,68 +2,63 @@ package com.meiyun.jkan.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.meiyun.jkan.model.base.JkanID;
+import org.hibernate.validator.constraints.Length;
+
+import com.meiyun.jkan.model.base.JkanAudit;
 
 /**
- * <p>User: Zhang Kaitao
- * <p>Date: 14-1-28
- * <p>Version: 1.0
+ * 组织管理类
+ * @author larry.qi
  */
 @Entity
 @Table(name = "sys_organizations")
-public class Organization extends JkanID {
+public class Organization extends JkanAudit {
 
 	private static final long serialVersionUID = -2093721689340681101L;
-    private String name; //组织机构名称
+
+	/**
+     * 资源ID
+     */
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Organization.class)
+    private Organization parent;
     
-    @Column(name = "parent_id")
-    private Long parentId; //父编号
-    
+    /**
+     * 资源IDs
+     */
+    @Length(max = 1024)
     @Column(name = "parent_ids")
-    private String parentIds; //父编号列表，如1/2/
-    private Boolean available = Boolean.FALSE;
+    private String parentIds;
 
+	public Organization() {
+		super();
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Organization(Long id) {
+		super(id);
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Organization(String name) {
+		super(name);
+	}
 
-    public Long getParentId() {
-        return parentId;
-    }
+	public Organization getParent() {
+		return parent;
+	}
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
+	public void setParent(Organization parent) {
+		this.parent = parent;
+	}
 
-    public String getParentIds() {
-        return parentIds;
-    }
+	public String getParentIds() {
+		return parentIds;
+	}
 
-    public void setParentIds(String parentIds) {
-        this.parentIds = parentIds;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
-
-    public boolean isRootNode() {
-        return parentId == 0;
-    }
-
-    public String makeSelfAsParentIds() {
-        return getParentIds() + getId() + "/";
-    }
+	public void setParentIds(String parentIds) {
+		this.parentIds = parentIds;
+	}
 
 }

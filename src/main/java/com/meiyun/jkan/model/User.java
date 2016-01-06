@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 import com.jkanfox.jkan.boot.security.SecurityUtils;
 import com.meiyun.jkan.model.base.JkanBase;
-import com.meiyun.jkan.utils.RequestUtils;
 
 /**
  * 用户表
@@ -23,9 +23,25 @@ public class User extends JkanBase {
 	private static final long serialVersionUID = 7115721912538842709L;
 	
 	/**
+	 * 用户密码
+	 */
+	@NotNull
+	@Length(max = 64)
+	private String password;
+
+	/**
+	 * 访问控制
+	 */
+	@NotNull
+	@Length(max = 64)
+	@Column(name = "access_key", updatable = false)
+	private String accessKey;
+	
+	/**
 	 * 邮箱
 	 */
 	@Email
+	@Length(max = 64)
 	private String email;
 	
 	/**
@@ -33,25 +49,6 @@ public class User extends JkanBase {
 	 */
 	@Column(name = "is_email_set")
 	private Integer isEmailSet;
-
-	/**
-	 * 用户密码
-	 */
-	@NotNull
-	private String password;
-
-	/**
-	 * 盐：密码盐
-	 */
-	@NotNull
-	@Column(updatable = false)
-	private String salt;
-
-	/**
-	 * 创建IP
-	 */
-	@Column(updatable = false, name = "create_ip")
-	private String createIp;
 
 	public User() {
 		super();
@@ -71,10 +68,9 @@ public class User extends JkanBase {
 	 */
 	public static User create(String name, String email, String password, HttpServletRequest request) {
 		User um = new User();
-		um.setCreateIp(RequestUtils.getIpAddr(request));
 		um.setName(name);
-		um.setSalt(SecurityUtils.randomSalt());
-		um.setPassword(SecurityUtils.encryptPassword(um.getSalt(), password));
+		um.setAccessKey(SecurityUtils.randomSalt());
+		um.setPassword(SecurityUtils.encryptPassword(um.getAccessKey(), password));
 		um.setState(1); 
 		um.setTitle(name);
 		um.setEmail(email);
@@ -88,22 +84,6 @@ public class User extends JkanBase {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
-
-	public String getCreateIp() {
-		return createIp;
-	}
-
-	public void setCreateIp(String createIp) {
-		this.createIp = createIp;
 	}
 
 	public String getEmail() {
@@ -122,8 +102,12 @@ public class User extends JkanBase {
 		this.isEmailSet = isEmailSet;
 	}
 	
-	public String getCredentialsSalt() {
-        return super.getName() + salt;
-    }
+	public String getAccessKey() {
+		return accessKey;
+	}
+
+	public void setAccessKey(String accessKey) {
+		this.accessKey = accessKey;
+	}
 
 }

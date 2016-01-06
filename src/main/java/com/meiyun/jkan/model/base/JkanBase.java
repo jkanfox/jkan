@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
 /**
  * 所有Model的基类
  * @author larry.qi
@@ -18,7 +20,8 @@ public abstract class JkanBase extends JkanID {
 	/**
 	 * 名称
 	 */
-	@NotNull
+	@NotNull()
+	@Length(max = 64)
 	@Column(unique = true)
 	private String name;
 	
@@ -26,11 +29,13 @@ public abstract class JkanBase extends JkanID {
 	 * 标题
 	 */
 	@NotNull
+	@Length(max = 128)
 	private String title;
 	
 	/**
 	 * 描述
 	 */
+	@Length(max = 1024)
 	private String description;
 	
 	/**

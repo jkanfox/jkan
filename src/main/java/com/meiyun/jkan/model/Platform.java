@@ -3,7 +3,7 @@ package com.meiyun.jkan.model;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.meiyun.jkan.model.base.JkanBase;
+import com.meiyun.jkan.model.base.JkanAudit;
 
 /**
  * 平台管理表
@@ -11,7 +11,7 @@ import com.meiyun.jkan.model.base.JkanBase;
  */
 @Entity
 @Table(name = "t_platforms")
-public class Platform extends JkanBase {
+public class Platform extends JkanAudit {
 
 	private static final long serialVersionUID = -2506648035186466395L;
 

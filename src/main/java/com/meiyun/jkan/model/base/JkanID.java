@@ -7,25 +7,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.google.common.base.Preconditions;
+
 /**
  * JkanID：统一管理表的ID
  * @author larry.qi
- *
  */
 @MappedSuperclass
 public abstract class JkanID implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * ID
-	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	public JkanID(Long id) {
-		super();
+		Preconditions.checkNotNull(id);
 		this.id = id;
 	}
 

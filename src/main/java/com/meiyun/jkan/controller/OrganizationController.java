@@ -44,8 +44,6 @@ public class OrganizationController {
         Organization parent = organizationService.findOne(parentId);
         model.addAttribute("parent", parent);
         Organization child = new Organization();
-        child.setParentId(parentId);
-        child.setParentIds(parent.makeSelfAsParentIds());
         model.addAttribute("child", child);
         model.addAttribute("op", "新增");
         return "organization/appendChild";
@@ -107,6 +105,5 @@ public class OrganizationController {
     public String success() {
         return "organization/success";
     }
-
 
 }

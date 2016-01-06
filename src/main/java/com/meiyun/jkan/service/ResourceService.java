@@ -3,16 +3,16 @@ package com.meiyun.jkan.service;
 import java.util.List;
 import java.util.Set;
 
-import com.meiyun.jkan.model.Resource;
+import com.meiyun.jkan.model.MResource;
 
 public interface ResourceService {
 	
-	public Resource createResource(Resource resource);
-    public Resource updateResource(Resource resource);
+	public MResource createResource(MResource resource);
+    public MResource updateResource(MResource resource);
     public void deleteResource(Long resourceId);
 
-    Resource findOne(Long resourceId);
-    List<Resource> findAll();
+    MResource findOne(Long resourceId);
+    List<MResource> findAll();
 
     /**
      * 得到资源对应的权限字符串
@@ -26,6 +26,6 @@ public interface ResourceService {
      * @param permissions
      * @return
      */
-    List<Resource> findMenus(Set<String> permissions);
+    List<MResource> findMenus(Set<String> permissions);
 
 }

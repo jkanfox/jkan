@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		final User um = list.get(0);
-		String pass = SecurityUtils.encryptPassword(um.getSalt(), password);
+		String pass = SecurityUtils.encryptPassword(um.getAccessKey(), password);
 		if (!pass.equals(um.getPassword())) {
 			throw new Exception("用户名或密码错误");
 		}

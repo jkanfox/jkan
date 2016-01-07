@@ -3,6 +3,7 @@ package com.meiyun.jkan.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,8 +24,11 @@ public class Organization extends JkanAudit {
 	/**
      * 资源ID
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Organization.class)
-    private Organization parent;
+   /* @ManyToOne(fetch = FetchType.LAZY, targetEntity = Organization.class)
+    @JoinColumn(name = "parent")
+    private Organization parent;*/
+	
+	private Long parent;
     
     /**
      * 资源IDs
@@ -45,11 +49,11 @@ public class Organization extends JkanAudit {
 		super(name);
 	}
 
-	public Organization getParent() {
+	public Long getParent() {
 		return parent;
 	}
 
-	public void setParent(Organization parent) {
+	public void setParent(Long parent) {
 		this.parent = parent;
 	}
 

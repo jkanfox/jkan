@@ -10,7 +10,7 @@ import com.meiyun.jkan.model.Group;
  * 类别数据中心
  * @author larry.qi
  */
-public interface GroupRepository extends JpaRepository<Group, Integer> {
+public interface GroupRepository extends JpaRepository<Group, Long> {
 
 	/**
 	 * 根据Title查询

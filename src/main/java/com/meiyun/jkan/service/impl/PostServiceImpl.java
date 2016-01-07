@@ -25,7 +25,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post findById(Integer id) {
+	public Post findById(Long id) {
 		return pr.findOne(id);
 	}
 
@@ -51,7 +51,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public void deletePost(Integer id) {
+	public void deletePost(Long id) {
 		Preconditions.checkNotNull(id);
 		pr.delete(id);
 	}

@@ -56,7 +56,7 @@ public class GroupController extends BaseController {
 			@RequestParam(required = false) String q) {
 		Page<Group> pageInfo = gs.findGroups(new PageRequest(page, size));
 		model.addAttribute("c", new Context(pageInfo));
-		return "group/index";
+		return "views/group/index";
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody Group findById(@PathVariable Integer id) {
+	public @ResponseBody Group findById(@PathVariable Long id) {
 		return gs.findById(id);
 	}
 	
@@ -75,12 +75,12 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
-	public String findPostsByGroupId(@PathVariable Integer id, Model model) {
+	public String findPostsByGroupId(@PathVariable Long id, Model model) {
 		Context c = new Context(gs.findPostsByGroupId(id, new PageRequest(0, 50)));
 		c.add("flag", true);
 		c.add("group", gs.findById(id));
 		model.addAttribute("c", c);
-		return "posts/index";
+		return "views/posts/index";
 	}
 	
 	/**
@@ -99,7 +99,7 @@ public class GroupController extends BaseController {
 	 */
 	@RequestMapping(value = "/new", method = {RequestMethod.GET})
 	public String addGroupPage() {
-		return "group/new";
+		return "views/group/new";
 	}
 	
 	/**
@@ -118,10 +118,10 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}/edit", method = {RequestMethod.GET})
-	public String editGroupPage(@PathVariable Integer id, Model model) {
+	public String editGroupPage(@PathVariable Long id, Model model) {
 		Preconditions.checkNotNull(id, "Group Id 不能为空。");
 		model.addAttribute("c", new Context(gs.findById(id)));
-		return "group/edit";
+		return "views/group/edit";
 	}
 	
 	/**
@@ -141,7 +141,7 @@ public class GroupController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}/delete", method = {RequestMethod.GET, RequestMethod.POST})
-	public void deleteGroup(@PathVariable Integer id) {
+	public void deleteGroup(@PathVariable Long id) {
 		Preconditions.checkNotNull(id);
 		gs.deleteGroup(id);
 	}

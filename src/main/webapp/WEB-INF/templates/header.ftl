@@ -11,7 +11,7 @@
 <meta name="keywords" content="${keywords!}">
 <meta name="author" content="/humans.txt">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/commons/css/bootstrap.min.css">
 </head>
 <body>
 

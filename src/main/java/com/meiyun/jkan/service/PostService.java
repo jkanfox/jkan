@@ -25,7 +25,7 @@ public interface PostService {
 	 * @param id
 	 * @return
 	 */
-	Post findById(Integer id);
+	Post findById(Long id);
 	
 	/**
 	 * 检验Posts
@@ -51,6 +51,6 @@ public interface PostService {
 	 * 删除Posts
 	 * @param id
 	 */
-	void deletePost(Integer id);
+	void deletePost(Long id);
 
 }

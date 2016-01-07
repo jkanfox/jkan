@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,11 +43,11 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/settings", method = RequestMethod.GET)
-	public String settings(@PathVariable Integer id, Model model) {
+	public String settings(@PathVariable Long id, Model model) {
 		Context c = new Context(userService.findById(id));
 		model.addAttribute("c", c);
 		model.addAttribute("id", id);
-		return "user/settings";
+		return "views/user/settings";
 	}
 	
 	/**
@@ -70,8 +71,8 @@ public class UserController extends BaseController {
 	    @RequiresPermissions("user:view")
 	    @RequestMapping(method = RequestMethod.GET)
 	    public String list(Model model) {
-	        model.addAttribute("userList", userService.findAll());
-	        return "user/list";
+	        model.addAttribute("userList", userService.findAll(new PageRequest(1, 20)));
+	        return "views/user/list";
 	    }
 
 	    @RequiresPermissions("user:create")
@@ -80,7 +81,7 @@ public class UserController extends BaseController {
 	        setCommonData(model);
 	        model.addAttribute("user", new User());
 	        model.addAttribute("op", "新增");
-	        return "user/edit";
+	        return "views/user/edit";
 	    }
 
 	    @RequiresPermissions("user:create")
@@ -97,7 +98,7 @@ public class UserController extends BaseController {
 	        setCommonData(model);
 	        model.addAttribute("user", userService.findOne(id));
 	        model.addAttribute("op", "修改");
-	        return "user/edit";
+	        return "views/user/edit";
 	    }
 
 	    @RequiresPermissions("user:update")
@@ -114,7 +115,7 @@ public class UserController extends BaseController {
 	        setCommonData(model);
 	        model.addAttribute("user", userService.findOne(id));
 	        model.addAttribute("op", "删除");
-	        return "user/edit";
+	        return "views/user/edit";
 	    }
 
 	    @RequiresPermissions("user:delete")
@@ -131,7 +132,7 @@ public class UserController extends BaseController {
 	    public String showChangePasswordForm(@PathVariable("id") Long id, Model model) {
 	        model.addAttribute("user", userService.findOne(id));
 	        model.addAttribute("op", "修改密码");
-	        return "user/changePassword";
+	        return "views/user/changePassword";
 	    }
 
 	    @RequiresPermissions("user:update")
@@ -143,8 +144,8 @@ public class UserController extends BaseController {
 	    }
 
 	    private void setCommonData(Model model) {
-	        model.addAttribute("organizationList", organizationService.findAll());
-	        model.addAttribute("roleList", roleService.findAll());
+	        model.addAttribute("organizationList", organizationService.findAll(new PageRequest(1, 10)));
+	        model.addAttribute("roleList", roleService.findAll(new PageRequest(0, 20)));
 	    }
 
 }

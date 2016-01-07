@@ -75,7 +75,7 @@ public class HomeController extends BaseController {
         Set<String> permissions = userService.findPermissions(loginUser.getName());  
         List<MResource> menus = resourceService.findMenus(permissions);  
         model.addAttribute("menus", menus);  
-        return "about";  
+        return "views/about/index";  
     }  
 
 }

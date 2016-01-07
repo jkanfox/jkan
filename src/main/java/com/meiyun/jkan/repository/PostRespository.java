@@ -12,7 +12,7 @@ import com.meiyun.jkan.model.Post;
  * 帖子数据中心
  * @author larry.qi
  */
-public interface PostRespository extends JpaRepository<Post, Integer> {
+public interface PostRespository extends JpaRepository<Post, Long> {
 
 	/**
 	 * 根据Title查询
@@ -26,5 +26,5 @@ public interface PostRespository extends JpaRepository<Post, Integer> {
 	 * @param groupId
 	 * @return
 	 */
-	Page<Post> findPostsByGroupId(Integer groupId, Pageable pageable);
+	Page<Post> findPostsByGroupId(Long groupId, Pageable pageable);
 }

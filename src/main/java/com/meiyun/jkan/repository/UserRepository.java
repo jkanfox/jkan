@@ -10,7 +10,7 @@ import com.meiyun.jkan.model.User;
  * 用户数据中心
  * @author larry.qi
  */
-public interface UserRepository extends JpaRepository<User, Integer>  {
+public interface UserRepository extends JpaRepository<User, Long>  {
 
 	/**
 	 * 根据名称或邮箱查询

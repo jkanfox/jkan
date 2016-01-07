@@ -1,6 +1,7 @@
 package com.meiyun.jkan.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.meiyun.jkan.model.Organization;
 
@@ -14,7 +15,7 @@ public interface OrganizationService {
 
 	Organization findOne(Long organizationId);
 
-	List<Organization> findAll();
+	Page<Organization> findAll(Pageable pageable);
 
 	Object findAllWithExclude(Organization excludeOraganization);
 

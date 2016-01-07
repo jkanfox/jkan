@@ -1,15 +1,20 @@
 package com.meiyun.jkan.service.impl;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.meiyun.jkan.model.Organization;
+import com.meiyun.jkan.repository.OrganizationRepository;
 import com.meiyun.jkan.service.OrganizationService;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
 
+	@Autowired
+	private OrganizationRepository or;
+	
 	@Override
 	public Organization createOrganization(Organization organization) {
 		// TODO Auto-generated method stub
@@ -35,8 +40,8 @@ public class OrganizationServiceImpl implements OrganizationService {
 	}
 
 	@Override
-	public List<Organization> findAll() {
-		return null;
+	public Page<Organization> findAll(Pageable pageable) {
+		return or.findAll(pageable);
 	}
 
 	@Override

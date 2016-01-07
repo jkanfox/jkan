@@ -2,6 +2,7 @@ package com.meiyun.jkan.controller;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +35,7 @@ public class OrganizationController {
     @RequiresPermissions("organization:view")
     @RequestMapping(value = "/tree", method = RequestMethod.GET)
     public String showTree(Model model) {
-        model.addAttribute("organizationList", organizationService.findAll());
+        model.addAttribute("organizationList", organizationService.findAll(new PageRequest(0, 10)));
         return "organization/tree";
     }
 

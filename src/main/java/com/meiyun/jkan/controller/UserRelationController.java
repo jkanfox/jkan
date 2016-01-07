@@ -41,7 +41,7 @@ public class UserRelationController extends BaseController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() {
-		return "user/login";
+		return "views/user/login";
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class UserRelationController extends BaseController {
 	 */
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
 	public String registPage() {
-		return "user/regist";
+		return "views/user/regist";
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class UserRelationController extends BaseController {
 	 */
 	@RequestMapping(value = "/forgot", method = RequestMethod.GET)
 	public String forgotPage() {
-		return "user/forgot";
+		return "views/user/forgot";
 	}
 	
 	/**

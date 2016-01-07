@@ -35,8 +35,9 @@ public class MResource extends JkanAudit {
     /**
      * 资源ID
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = MResource.class)
-    private MResource parent;
+    /*@ManyToOne(fetch = FetchType.LAZY, targetEntity = MResource.class)
+    private MResource parent;*/
+	private Long parent;
     
     /**
      * 资源IDs
@@ -79,11 +80,11 @@ public class MResource extends JkanAudit {
 		this.url = url;
 	}
 
-	public MResource getParent() {
+	public Long getParent() {
 		return parent;
 	}
 
-	public void setParent(MResource parent) {
+	public void setParent(Long parent) {
 		this.parent = parent;
 	}
 

@@ -26,14 +26,14 @@ public interface GroupService {
 	 * @param id
 	 * @return
 	 */
-	Group findById(Integer id);
+	Group findById(Long id);
 	
 	/**
 	 * 根据ID查询所有Posts
 	 * @param id
 	 * @return
 	 */
-	Page<Post> findPostsByGroupId(Integer id, PageRequest pageRequest);
+	Page<Post> findPostsByGroupId(Long id, PageRequest pageRequest);
 	
 	/**
 	 * 检测名称是否可用
@@ -61,6 +61,6 @@ public interface GroupService {
 	 * 删除Group
 	 * @param id
 	 */
-	void deleteGroup(Integer id);
+	void deleteGroup(Long id);
 
 }

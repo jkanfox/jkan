@@ -3,6 +3,9 @@ package com.meiyun.jkan.service;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.meiyun.jkan.model.Role;
 
 public interface RoleService {
@@ -12,7 +15,7 @@ public interface RoleService {
     public void deleteRole(Long roleId);
 
     public Role findOne(Long roleId);
-    public List<Role> findAll();
+    public Page<Role> findAll(Pageable pageable);
 
     /**
      * 根据角色编号得到角色标识符列表

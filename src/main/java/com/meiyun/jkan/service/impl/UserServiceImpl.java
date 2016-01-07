@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
@@ -63,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findById(Integer id) {
+	public User findById(Long id) {
 		return ur.findOne(id);
 	}
 
@@ -107,9 +109,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public Page<User> findAll(Pageable pageable) {
+		return ur.findAll(pageable);
 	}
 
 	@Override

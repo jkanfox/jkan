@@ -36,12 +36,12 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public Group findById(Integer id) {
+	public Group findById(Long id) {
 		return gr.findOne(id);
 	}
 
 	@Override
-	public Page<Post> findPostsByGroupId(Integer id, PageRequest pageRequest) {
+	public Page<Post> findPostsByGroupId(Long id, PageRequest pageRequest) {
 		Preconditions.checkNotNull(id);
 		return pr.findPostsByGroupId(id, pageRequest);
 	}
@@ -68,7 +68,7 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public void deleteGroup(Integer id) {
+	public void deleteGroup(Long id) {
 		gr.delete(id);
 	}
 

@@ -2,6 +2,7 @@ package com.meiyun.jkan.controller;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +32,7 @@ public class RoleController {
     @RequiresPermissions("role:view")
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
-        model.addAttribute("roleList", roleService.findAll());
+        model.addAttribute("roleList", roleService.findAll(new PageRequest(0, 20)));
         return "role/list";
     }
 
@@ -87,7 +88,7 @@ public class RoleController {
     }
 
     private void setCommonData(Model model) {
-        model.addAttribute("resourceList", resourceService.findAll());
+        model.addAttribute("resourceList", resourceService.findAll(new PageRequest(0, 20)));
     }
 
 }

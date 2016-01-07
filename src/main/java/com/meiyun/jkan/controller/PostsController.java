@@ -60,7 +60,7 @@ public class PostsController extends BaseController {
 			@RequestParam(defaultValue = "50", required = false) Integer size,
 			@RequestParam(required = false) String q) {
 		model.addAttribute("c", new Context(ps.findPosts(new PageRequest(page, size))));
-		return "posts/index";
+		return "views/posts/index";
 	}
 	
 	/**
@@ -69,7 +69,7 @@ public class PostsController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody Post findById(@PathVariable Integer id) {
+	public @ResponseBody Post findById(@PathVariable Long id) {
 		Preconditions.checkNotNull(id);
 		return ps.findById(id);
 	}
@@ -101,7 +101,7 @@ public class PostsController extends BaseController {
 		pm.setUrl(wm.getUrl());
 		c.add("info", pm);
 		model.addAttribute("c", c);
-		return "posts/fetch";
+		return "views/posts/fetch";
 	}
 	
 	/**
@@ -109,7 +109,7 @@ public class PostsController extends BaseController {
 	 */
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String addPostsPage(Model model) {
-		return "posts/new";
+		return "views/posts/new";
 	}
 	
 	/**
@@ -128,13 +128,13 @@ public class PostsController extends BaseController {
 	 * 跳转到编辑Posts页面
 	 */
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public String editPostsPage(@PathVariable Integer id, Model model) {
+	public String editPostsPage(@PathVariable Long id, Model model) {
 		Preconditions.checkNotNull(id);
 		Context c = new Context(ps.findById(id));
 		Page<Group> pageInfo = gs.findGroups(new PageRequest(0, 50));
 		c.add("groups", pageInfo);
 		model.addAttribute("c", c);
-		return "posts/edit";
+		return "views/posts/edit";
 	}
 	
 	/**
@@ -152,7 +152,7 @@ public class PostsController extends BaseController {
 	 * 根据ID删除Posts
 	 */
 	@RequestMapping(value = "/{id}/delete", method = {RequestMethod.GET, RequestMethod.POST})
-	public void deletePosts(@PathVariable Integer id) {
+	public void deletePosts(@PathVariable Long id) {
 		Preconditions.checkNotNull(id);
 		ps.deletePost(id);
 	}

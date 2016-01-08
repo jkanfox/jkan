@@ -20,7 +20,7 @@ var userDataGrid = $('#dg').datagrid({
         {field:'state',title:'状态',width:100},
         {field:'created',title:'创建时间',width:100},
         {field:'lastModified',title:'最后更新时间',width:100},
-        {field:'resources',title:'资源',width:100},
+        {field:'permissions',title:'权限列表',width:100},
         {field:'createBy',title:'创建用户',width:100},
         {field:'auditBy',title:'审核用户',width:100},
         {field:'auditRemark',title:'审核意见',width:100}

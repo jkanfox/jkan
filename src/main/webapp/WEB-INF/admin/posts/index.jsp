@@ -25,10 +25,16 @@ var userDataGrid = $('#dg').datagrid({
         {field:'state',title:'状态',width:100},
         {field:'created',title:'创建时间',width:100},
         {field:'lastModified',title:'最后更新时间',width:100},
-        /* {field:'group',title:'所属分类',width:100}, */
+        {field:'group',title:'所属分类',width:100, formatter: function(value, row, index) {
+        	if (row.group) {
+				return row.group.title;
+			} else {
+				return value;
+			}
+        }},
         {field:'platforms',title:'平台列表',width:100},
-        /* {field:'createBy',title:'创建用户',width:100},
-        {field:'auditBy',title:'审核用户',width:100}, */
+        {field:'createBy',title:'创建用户',width:100},
+        {field:'auditBy',title:'审核用户',width:100},
         {field:'auditRemark',title:'审核意见',width:100}
     ]]
 });

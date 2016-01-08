@@ -6,16 +6,16 @@ import java.util.Set;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.meiyun.jkan.model.MResource;
+import com.meiyun.jkan.model.Permission;
 
-public interface ResourceService {
+public interface PermissionService {
 	
-	public MResource createResource(MResource resource);
-    public MResource updateResource(MResource resource);
+	public Permission createResource(Permission resource);
+    public Permission updateResource(Permission resource);
     public void deleteResource(Long resourceId);
 
-    MResource findOne(Long resourceId);
-    Page<MResource> findAll(Pageable pageable);
+    Permission findOne(Long resourceId);
+    Page<Permission> findAll(Pageable pageable);
 
     /**
      * 得到资源对应的权限字符串
@@ -29,6 +29,6 @@ public interface ResourceService {
      * @param permissions
      * @return
      */
-    List<MResource> findMenus(Set<String> permissions);
+    List<Permission> findMenus(Set<String> permissions);
 
 }

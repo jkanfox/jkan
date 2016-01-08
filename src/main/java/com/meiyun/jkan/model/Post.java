@@ -62,7 +62,7 @@ public class Post extends JkanAudit {
 	/**
 	 * 分组
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Group.class)
+	@ManyToOne(targetEntity = Group.class)
 	@JoinColumn(name = "group_id")
 	private Group group;
 	

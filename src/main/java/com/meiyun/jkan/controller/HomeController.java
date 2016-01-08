@@ -15,10 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.meiyun.jkan.Constants;
-import com.meiyun.jkan.model.MResource;
+import com.meiyun.jkan.model.Permission;
 import com.meiyun.jkan.model.User;
 import com.meiyun.jkan.security.CurrentUser;
-import com.meiyun.jkan.service.ResourceService;
+import com.meiyun.jkan.service.PermissionService;
 import com.meiyun.jkan.service.UserService;
 
 /**
@@ -66,14 +66,14 @@ public class HomeController extends BaseController {
 	}
 	
 	@Autowired  
-    private ResourceService resourceService;  
+    private PermissionService resourceService;  
     @Autowired  
     private UserService userService; 
     
     @RequestMapping("/about")  
     public String about(@CurrentUser User loginUser, Model model) {  
         Set<String> permissions = userService.findPermissions(loginUser.getName());  
-        List<MResource> menus = resourceService.findMenus(permissions);  
+        List<Permission> menus = resourceService.findMenus(permissions);  
         model.addAttribute("menus", menus);  
         return "views/about/index";  
     }  

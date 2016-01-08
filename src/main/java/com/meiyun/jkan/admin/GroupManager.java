@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.admin.vo.DataGrid;
 import com.meiyun.jkan.model.Group;
-import com.meiyun.jkan.model.User;
 import com.meiyun.jkan.service.GroupService;
 
 /**

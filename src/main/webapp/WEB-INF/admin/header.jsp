@@ -45,11 +45,14 @@
     <li class="nav-item">
       <a class="nav-link" href="/admin/platforms">平台管理</a>
     </li>
-     <li class="nav-item">
+    <li class="nav-item">
       <a class="nav-link" href="/admin/posts">链接管理</a>
     </li>
-     <li class="nav-item">
+    <li class="nav-item">
       <a class="nav-link" href="/admin/shares">分享管理</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/admin/tracks">异常追踪</a>
     </li>
   </ul>
   <form class="form-inline navbar-form pull-right">

@@ -16,8 +16,8 @@ import com.meiyun.jkan.model.base.JkanAudit;
  *
  */
 @Entity
-@Table(name = "sys_resources")
-public class MResource extends JkanAudit {
+@Table(name = "sys_permissions")
+public class Permission extends JkanAudit {
 	private static final long serialVersionUID = 2988039422131137959L;
 	
 	/**
@@ -52,15 +52,15 @@ public class MResource extends JkanAudit {
     @Length(max = 128)
     private String permission;
     
-	public MResource() {
+	public Permission() {
 		super();
 	}
 
-	public MResource(Long id) {
+	public Permission(Long id) {
 		super(id);
 	}
 
-	public MResource(String name) {
+	public Permission(String name) {
 		super(name);
 	}
 

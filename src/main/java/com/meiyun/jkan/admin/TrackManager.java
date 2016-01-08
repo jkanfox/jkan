@@ -14,43 +14,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.meiyun.jkan.Constants;
 import com.meiyun.jkan.admin.vo.DataGrid;
-import com.meiyun.jkan.model.Permission;
-import com.meiyun.jkan.model.Platform;
-import com.meiyun.jkan.service.PlatformService;
-import com.meiyun.jkan.service.PermissionService;
+import com.meiyun.jkan.model.Track;
+import com.meiyun.jkan.service.TrackService;
 
 /**
- * 资源权限管理
+ * 错误管理与追踪
  * @author larry.qi
  */
 @Controller
 @Scope(Constants.SCOPE)
 @RequestMapping("/admin")
-public class PermissionManager {
+public class TrackManager {
 	
-	private static Logger logger = LoggerFactory.getLogger(PermissionManager.class);
-
+	private static Logger logger = LoggerFactory.getLogger(TrackManager.class);
+	
 	@Autowired
-	private PermissionService rs;
-
-	@RequestMapping("/permissions")
+	private TrackService ts;
+	
+	/**
+	 * 用户管理
+	 * @return
+	 */
+	@RequestMapping("/tracks")
 	public String indexPage(Model model) {
-		model.addAttribute("title", "平台管理");
-		return "admin/permissions/index";
+		model.addAttribute("title", "异常管理与追踪");
+		return "admin/tracks/index";
 	}
 	
 	/**
-	 * 查询所有类别数据
+	 * 查询所有用户数据
 	 * @param page
 	 * @param size
 	 * @return
 	 */
-	@RequestMapping("/permissions/list")
-	public @ResponseBody DataGrid<Permission> findAll(Model model,
+	@RequestMapping("/tracks/list")
+	public @ResponseBody DataGrid<Track> findAll(Model model,
 			@RequestParam(required = false, defaultValue = "1") Integer page,
 			@RequestParam(required = false, defaultValue = "10") Integer rows) {
-		Page<Permission> pageInfo = rs.findAll(new PageRequest(page-1, rows));
-		return new DataGrid<Permission>(pageInfo.getTotalPages(), pageInfo.getContent());
+		Page<Track> pageInfo = ts.findAll(new PageRequest(page-1, rows));
+		return new DataGrid<Track>(pageInfo.getTotalPages(), pageInfo.getContent());
 	}
-	
+
 }

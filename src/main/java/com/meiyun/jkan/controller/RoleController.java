@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.meiyun.jkan.model.Role;
-import com.meiyun.jkan.service.ResourceService;
+import com.meiyun.jkan.service.PermissionService;
 import com.meiyun.jkan.service.RoleService;
 
 /**
@@ -27,7 +27,7 @@ public class RoleController {
     private RoleService roleService;
 
     @Autowired
-    private ResourceService resourceService;
+    private PermissionService resourceService;
 
     @RequiresPermissions("role:view")
     @RequestMapping(method = RequestMethod.GET)

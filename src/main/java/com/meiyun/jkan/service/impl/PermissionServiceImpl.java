@@ -8,24 +8,24 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.meiyun.jkan.model.MResource;
-import com.meiyun.jkan.repository.ResourceRepository;
-import com.meiyun.jkan.service.ResourceService;
+import com.meiyun.jkan.model.Permission;
+import com.meiyun.jkan.repository.PermissionRepository;
+import com.meiyun.jkan.service.PermissionService;
 
 @Service
-public class ResourceServiceImpl implements ResourceService {
+public class PermissionServiceImpl implements PermissionService {
 
 	@Autowired
-	private ResourceRepository rr;
+	private PermissionRepository rr;
 	
 	@Override
-	public MResource createResource(MResource resource) {
+	public Permission createResource(Permission resource) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MResource updateResource(MResource resource) {
+	public Permission updateResource(Permission resource) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -37,13 +37,13 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public MResource findOne(Long resourceId) {
+	public Permission findOne(Long resourceId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page<MResource> findAll(Pageable pageable) {
+	public Page<Permission> findAll(Pageable pageable) {
 		return rr.findAll(pageable);
 	}
 
@@ -54,7 +54,7 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public List<MResource> findMenus(Set<String> permissions) {
+	public List<Permission> findMenus(Set<String> permissions) {
 		// TODO Auto-generated method stub
 		return null;
 	}
